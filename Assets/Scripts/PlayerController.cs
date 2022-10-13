@@ -41,23 +41,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleMovement();
-        
-        HandleRotation();
 
         Jump();
 
     }
-
-    void HandleRotation()
-    {
-        Vector3 currentPos = transform.position;
-
-        Vector3 newPos = new Vector3(moveDirection.x, 0, moveDirection.y);
-
-        Vector3 posToLookAt = currentPos + newPos;
-        
-        transform.LookAt(posToLookAt);
-    }
+    
     
     void HandleMovement()
     {

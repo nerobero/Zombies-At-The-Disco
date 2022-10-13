@@ -410,11 +410,11 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 0
-  m_Radius: 3.563843
+  m_Height: 190
+  m_Radius: 30
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8482531888938005008
@@ -446,7 +446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1896080167758808979, guid: 799824b2e4f83f84aa636c8ee9b1b8c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 41.4
+      value: 41.46
       objectReference: {fileID: 0}
     - target: {fileID: 1896080167758808979, guid: 799824b2e4f83f84aa636c8ee9b1b8c6, type: 3}
       propertyPath: m_LocalPosition.y
