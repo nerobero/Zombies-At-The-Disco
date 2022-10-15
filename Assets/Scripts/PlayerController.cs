@@ -35,10 +35,10 @@ public class PlayerController : MonoBehaviour
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,
             smoothTurnTime);
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
+        
         moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         moveDir *= direction.magnitude;
-
+        
         if (moveDir.magnitude >= 0.1f)
         {
             playerAnimator.SetBool("isWalking", true);
@@ -67,18 +67,18 @@ public class PlayerController : MonoBehaviour
         {
             moveDir *= speed;
         }
-
+        
         moveDir.y = currentVerticalAccel;
-
-
+        
+        
         if (Input.GetButtonDown("Jump"))
         {
             moveDir.y = jumpForce;
         }
-
+        
         moveDir.y -= gravity * Time.deltaTime;
         
-       
+        
         controller.Move(moveDir * Time.deltaTime);
 
     }
