@@ -1,80 +1,85 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Transactions;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private CharacterController controller;
-    
-    public PlayerInputControl inputs;
-    private InputAction move;
+    public CharacterController controller;
+    public Transform cam;
 
-    private Animator anim; 
+    public Animator playerAnimator; 
+
+    public float speed = 6f;
+
+    public float gravity = 10f;
+    public float jumpForce = 2f;
+    public float sprintSpeed = 18f;
+
+    public float smoothTurnTime = 0.1f;
+    float turnSmoothVelocity;
     
-    private Vector3 moveDirection;
-    private bool movementPressed;
-    private Vector3 velocity;
-    private float gravity = -9.8f;
-    public float speed = 30f;
-    public float jumpHeight = 20f;
-    private bool grounded;
-    private float groundCastDist = 5f;
-    
-    void Awake()
-    {
-        inputs = new PlayerInputControl();
-        
-        inputs.PlayerInteraction.Move.performed += context =>
-        {
-            moveDirection = context.ReadValue<Vector3>();
-        };
-    }
-    
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    private Vector3 moveDir = Vector3.zero;
+
+    private bool sprinting = false;
 
     // Update is called once per frame
     void Update()
     {
-        Transform playerTransform = transform;
-        HandleMovement(playerTransform);
-        Jump(playerTransform);
-
-    }
-    
-    
-    void HandleMovement(Transform playerTransform)
-    {
-        Vector3 movement = (playerTransform.right * moveDirection.x)
-                           + (playerTransform.forward * moveDirection.z);
-        controller.Move(movement * (speed * Time.deltaTime));
-    }
-
-    private void Jump(Transform playerTransform)
-    {
-        grounded = Physics.Raycast(playerTransform.position, Vector3.down, groundCastDist);
+        float currentVerticalAccel = moveDir.y + 0f;
         
-        velocity.y += gravity * Time.deltaTime; 
-        if (inputs.PlayerInteraction.Jump.triggered && grounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight);
-        } 
-        controller.Move(velocity * Time.deltaTime);
-    }
-    
-    private void OnEnable()
-    {
-        inputs.PlayerInteraction.Enable();
-    }
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+        
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,
+            smoothTurnTime);
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-    private void OnDisable()
-    {
-       inputs.PlayerInteraction.Disable();
+        moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        moveDir *= direction.magnitude;
+
+        if (moveDir.magnitude >= 0.1f)
+        {
+            playerAnimator.SetBool("isWalking", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("isWalking", false);
+        }
+        
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            sprinting = true;
+            playerAnimator.SetBool("isRunning", true);
+        }
+        else
+        { 
+            sprinting = false;
+            playerAnimator.SetBool("isRunning", false);
+        }
+        
+        if (sprinting)
+        {
+            moveDir *= sprintSpeed;
+        }
+        else
+        {
+            moveDir *= speed;
+        }
+
+        moveDir.y = currentVerticalAccel;
+
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            moveDir.y = jumpForce;
+        }
+
+        moveDir.y -= gravity * Time.deltaTime;
+        
+       
+        controller.Move(moveDir * Time.deltaTime);
+
     }
 }
