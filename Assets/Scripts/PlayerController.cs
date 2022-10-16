@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private CharacterController controller;
     
+    [SerializeField] private Camera cam;
+    
     public PlayerInputControl inputs;
     private InputAction move;
 
