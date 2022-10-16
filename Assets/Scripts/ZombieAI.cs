@@ -27,7 +27,8 @@ public class ZombieAI : MonoBehaviour
     private GameObject megan;
     private Animator zombieAnimator;
 
-    private HPSystem meganHP;
+    [SerializeField] private float zombieHealth = 15f;
+    private float meganHP;
 
 
     // Start is called before the first frame update
@@ -37,7 +38,7 @@ public class ZombieAI : MonoBehaviour
         walkSpeed = GetComponent<NavMeshAgent>().speed;
         zombieAnimator = GetComponent<Animator>();
         SwitchToState(State.Chill);
-        meganHP = new GameObject().AddComponent<HPSystem>();
+        meganHP = new GameObject().AddComponent<HPSystem>().currentHealth;
     }
 
     // Update is called once per frame
@@ -116,14 +117,10 @@ public class ZombieAI : MonoBehaviour
     
     void CheckForDeath()
     {
-        if ((transform.position - megan.transform.position).magnitude > 25f)
-        {
-            SwitchToState(State.Run);
-        }
-        else
+        if (zombieHealth - 10f <= 0.01)
         {
             SwitchToState(State.Die);
-        }
+        } 
     }
 
     public void DeadCompleted()
@@ -181,7 +178,7 @@ public class ZombieAI : MonoBehaviour
         if (GameObject.Find("Megan").GetComponent<CapsuleCollider>().radius - GetComponent<CapsuleCollider>().radius <=
             1)
         {
-            meganHP.TakeDamage(10);
+            meganHP -= 10f;
         }
     }
 }

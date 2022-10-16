@@ -302,6 +302,7 @@ MonoBehaviour:
   currentState: 0
   currentDestination: {x: 40, y: 0, z: 60}
   runSpeed: 15
+  zombieHealth: 15
 --- !u!195 &4131822035441237888
 NavMeshAgent:
   m_ObjectHideFlags: 0
