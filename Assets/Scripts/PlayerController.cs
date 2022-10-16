@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Transactions;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool movementPressed;
     private Vector3 velocity;
     private float gravity = -9.8f;
-    public float speed = 30f;
+    public float speed = 20f;
     public float jumpHeight = 20f;
     private bool grounded;
     private float groundCastDist = 5f;
@@ -45,7 +46,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Transform playerTransform = transform;
+        Transform cameraTransform = cam.transform;
         HandleMovement(playerTransform);
+
+        Rotate(playerTransform, cameraTransform);
+        
         Jump(playerTransform);
 
     }
@@ -55,6 +60,9 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 movement = (playerTransform.right * moveDirection.x)
                            + (playerTransform.forward * moveDirection.z);
+        
+        // Vector3 movement = (playerTransform.forward * moveDirection.z); //non strafing
+        
         controller.Move(movement * (speed * Time.deltaTime));
     }
 
@@ -68,6 +76,13 @@ public class PlayerController : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight);
         } 
         controller.Move(velocity * Time.deltaTime);
+    }
+    
+    private void Rotate(Transform playerTransform, Transform cameraTransform)
+    {
+        playerTransform.rotation = Quaternion.AngleAxis(cameraTransform.eulerAngles.y, Vector3.up);
+        // playerTransform.rotation = Quaternion.AngleAxis(playerTransform.eulerAngles.y 
+        //                                                 + (moveDirection.x *3), Vector3.up);
     }
     
     private void OnEnable()
