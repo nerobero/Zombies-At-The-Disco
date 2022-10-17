@@ -873,8 +873,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 170
-  m_Radius: 30
+  m_Height: 0
+  m_Radius: 0
   m_SlopeLimit: 45
   m_StepOffset: 0.0005
   m_SkinWidth: 0.01
@@ -890,10 +890,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 30
-  m_Height: 170
+  m_Radius: 30.00437
+  m_Height: 189.09686
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.0043725963, y: -9.54834, z: -2.1041478e-11}
 --- !u!95 &3200827185384228840
 Animator:
   serializedVersion: 4
@@ -1528,7 +1528,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8548629671083998810}
   m_LocalRotation: {x: -0.50000036, y: -0.49999964, z: -0.49999967, w: 0.50000036}
-  m_LocalPosition: {x: -0, y: -88.859375, z: 0.0000023110326}
+  m_LocalPosition: {x: -0, y: -54.1, z: 0.0000023110326}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []

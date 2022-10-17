@@ -120,7 +120,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""89786c64-8f69-4f9b-a328-86e1ad3fd66a"",
                     ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": ""Press(pressPoint=0.5)"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Run"",

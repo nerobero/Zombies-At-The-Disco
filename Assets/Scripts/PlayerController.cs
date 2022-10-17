@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
     private float gravity = -9.8f;
     public float speed = 20f;
+    public float runSpeed = 40f;
     public float jumpHeight = 20f;
     private bool grounded;
     private float groundCastDist = 5f;
@@ -49,13 +50,23 @@ public class PlayerController : MonoBehaviour
         Transform cameraTransform = cam.transform;
         HandleMovement(playerTransform);
 
+        HandleRun(playerTransform);
+        
         Rotate(playerTransform, cameraTransform);
         
         Jump(playerTransform);
 
     }
-    
-    
+
+    private void HandleRun(Transform playerTransform)
+    {
+        if (inputs.PlayerInteraction.Run.triggered)
+        {
+            
+        }
+    }
+
+
     void HandleMovement(Transform playerTransform)
     {
         Vector3 movement = (playerTransform.right * moveDirection.x)
