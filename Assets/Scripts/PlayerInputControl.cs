@@ -80,6 +80,15 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EndRun"",
+                    ""type"": ""Button"",
+                    ""id"": ""34079926-b586-4f03-95b6-d2c2d02bffcd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +201,17 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd504a85-59f9-434f-9e84-226cd58da069"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EndRun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -223,6 +243,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         m_PlayerInteraction_Jump = m_PlayerInteraction.FindAction("Jump", throwIfNotFound: true);
         m_PlayerInteraction_Run = m_PlayerInteraction.FindAction("Run", throwIfNotFound: true);
         m_PlayerInteraction_EnergyDrink = m_PlayerInteraction.FindAction("EnergyDrink", throwIfNotFound: true);
+        m_PlayerInteraction_EndRun = m_PlayerInteraction.FindAction("EndRun", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -288,6 +309,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerInteraction_Jump;
     private readonly InputAction m_PlayerInteraction_Run;
     private readonly InputAction m_PlayerInteraction_EnergyDrink;
+    private readonly InputAction m_PlayerInteraction_EndRun;
     public struct PlayerInteractionActions
     {
         private @PlayerInputControl m_Wrapper;
@@ -298,6 +320,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerInteraction_Jump;
         public InputAction @Run => m_Wrapper.m_PlayerInteraction_Run;
         public InputAction @EnergyDrink => m_Wrapper.m_PlayerInteraction_EnergyDrink;
+        public InputAction @EndRun => m_Wrapper.m_PlayerInteraction_EndRun;
         public InputActionMap Get() { return m_Wrapper.m_PlayerInteraction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -325,6 +348,9 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                 @EnergyDrink.started -= m_Wrapper.m_PlayerInteractionActionsCallbackInterface.OnEnergyDrink;
                 @EnergyDrink.performed -= m_Wrapper.m_PlayerInteractionActionsCallbackInterface.OnEnergyDrink;
                 @EnergyDrink.canceled -= m_Wrapper.m_PlayerInteractionActionsCallbackInterface.OnEnergyDrink;
+                @EndRun.started -= m_Wrapper.m_PlayerInteractionActionsCallbackInterface.OnEndRun;
+                @EndRun.performed -= m_Wrapper.m_PlayerInteractionActionsCallbackInterface.OnEndRun;
+                @EndRun.canceled -= m_Wrapper.m_PlayerInteractionActionsCallbackInterface.OnEndRun;
             }
             m_Wrapper.m_PlayerInteractionActionsCallbackInterface = instance;
             if (instance != null)
@@ -347,6 +373,9 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                 @EnergyDrink.started += instance.OnEnergyDrink;
                 @EnergyDrink.performed += instance.OnEnergyDrink;
                 @EnergyDrink.canceled += instance.OnEnergyDrink;
+                @EndRun.started += instance.OnEndRun;
+                @EndRun.performed += instance.OnEndRun;
+                @EndRun.canceled += instance.OnEndRun;
             }
         }
     }
@@ -368,5 +397,6 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnEnergyDrink(InputAction.CallbackContext context);
+        void OnEndRun(InputAction.CallbackContext context);
     }
 }

@@ -22,10 +22,11 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
     private float gravity = -9.8f;
     public float speed = 20f;
-    public float runSpeed = 40f;
+    public float runSpeed = 60f;
     public float jumpHeight = 20f;
     private bool grounded;
     private float groundCastDist = 5f;
+    private bool isRunning;
     
     void Awake()
     {
@@ -35,9 +36,13 @@ public class PlayerController : MonoBehaviour
         {
             moveDirection = context.ReadValue<Vector3>();
         };
+
+        inputs.PlayerInteraction.Run.performed += Run;
+        inputs.PlayerInteraction.EndRun.performed += RunEnd;
     }
-    
-    
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,9 +65,17 @@ public class PlayerController : MonoBehaviour
 
     private void HandleRun(Transform playerTransform)
     {
-        if (inputs.PlayerInteraction.Run.triggered)
+        Vector3 movement = (playerTransform.right * moveDirection.x)
+                           + (playerTransform.forward * moveDirection.z);
+        
+        if (isRunning)
         {
-            
+            controller.Move(movement * (runSpeed * Time.deltaTime));
+        }
+        
+        if (!isRunning)
+        {
+            controller.Move(movement * (speed * Time.deltaTime));
         }
     }
 
@@ -95,6 +108,17 @@ public class PlayerController : MonoBehaviour
         // playerTransform.rotation = Quaternion.AngleAxis(playerTransform.eulerAngles.y 
         //                                                 + (moveDirection.x *3), Vector3.up);
     }
+    
+    private void Run(InputAction.CallbackContext obj)
+    {
+        isRunning = true;
+    }
+
+    private void RunEnd(InputAction.CallbackContext obj)
+    {
+        isRunning = false;
+    }
+
     
     private void OnEnable()
     {
