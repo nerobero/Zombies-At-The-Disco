@@ -21,8 +21,8 @@ public class ZombieAI : MonoBehaviour
     [SerializeField] private float runSpeed;
     private float walkSpeed = 5f;
 
-    private float viewAngle = 0.25f;
-    private float viewDistance = 5f;
+    private float viewAngle = 1f;
+    private float viewDistance = 20f;
 
     private GameObject megan;
     private Animator zombieAnimator;
@@ -91,18 +91,19 @@ public class ZombieAI : MonoBehaviour
                 {
                     CancelInvoke("SwitchToWalk");
                     Invoke("CheckForDeath", 10.0f);
-                    currentDestination = megan.transform.position;
-                    GetComponent<NavMeshAgent>().destination = currentDestination;
                     UpdateZombieAnimator(false, true, false);
                     GetComponent<NavMeshAgent>().speed = runSpeed;
                     transitionActive = false;
                 }
+                currentDestination = megan.transform.position;
+                GetComponent<NavMeshAgent>().destination = currentDestination;
 
                 if ((transform.position - currentDestination).magnitude < 2.5f)
                 {
                     CancelInvoke("CheckForDeath");
                     CheckForDeath();
                 }
+                Debug.Log("run");
                 break;
             case State.Die:
                 if (transitionActive)
@@ -160,7 +161,7 @@ public class ZombieAI : MonoBehaviour
             Vector3.Normalize(target.transform.position - transform.position));
         float view = 1.0f - viewingAngle;
         float distance = (transform.position - target.transform.position).magnitude;
-        return ((dotProduct >= view) && (distance < viewingDistance));
+        return dotProduct >= view && distance < viewingDistance;
     }
 
     Vector3 ValidDestination()
