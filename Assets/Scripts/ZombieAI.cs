@@ -21,8 +21,8 @@ public class ZombieAI : MonoBehaviour
     [SerializeField] private float runSpeed;
     private float walkSpeed = 5f;
 
-    private float viewAngle = 1f;
-    private float viewDistance = 20f;
+    private float viewAngle = 5f;
+    private float viewDistance = 50f;
 
     private GameObject megan;
     private Animator zombieAnimator;
@@ -103,7 +103,11 @@ public class ZombieAI : MonoBehaviour
                     CancelInvoke("CheckForDeath");
                     CheckForDeath();
                 }
-                Debug.Log("run");
+
+                if ((transform.position - megan.transform.position).magnitude > 60f)
+                {
+                    SwitchToState(State.Chill);
+                }
                 break;
             case State.Die:
                 if (transitionActive)
