@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
 
         inputs.PlayerInteraction.Run.performed += Run;
         inputs.PlayerInteraction.EndRun.performed += RunEnd;
+        NonMovementControls cont = new GameObject().AddComponent<NonMovementControls>();
     }
 
 
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour
         Rotate(playerTransform, cameraTransform);
         
         Jump(playerTransform);
-
+        
     }
 
     private void HandleRun(Transform playerTransform)
