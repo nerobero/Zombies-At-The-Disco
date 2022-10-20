@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
    private Animator anim;
 
    [SerializeField] private Transform meleeTransform;
-
+   [SerializeField] private Transform drinkHolder;
 
    private InputAction attack;
 
@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
    // Start is called before the first frame update
    void Start()
    {
+       drinkHolder.GetChild(0).gameObject.SetActive(false);
    }
 
    // Update is called once per frame
@@ -103,6 +104,7 @@ public class PlayerController : MonoBehaviour
    public void DrinkComplete()
    {
        animator.SetBool("isDrink", false);
+       drinkHolder.GetChild(0).gameObject.SetActive(false);
    }
 
    
@@ -154,14 +156,7 @@ public class PlayerController : MonoBehaviour
 
        controller.Move(velocity * Time.deltaTime);
    }
-
-   private void Attack()
-   {
-       if (inputs.PlayerInteraction.Attack.triggered)
-       {
-           animator.SetBool("isSwinging", true);
-       }
-   }
+   
    
    // TODO: What Angela had previously
    private void Attack(InputAction.CallbackContext obj)
@@ -216,6 +211,7 @@ public class PlayerController : MonoBehaviour
            }
            else
            {
+               drinkHolder.GetChild(0).gameObject.SetActive(true);
                animator.SetBool("isDrink", true);
                Debug.Log("Drank energy drink");
                PlayerHpSystem.EnergyDrink(30f);
