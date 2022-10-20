@@ -48,7 +48,7 @@ public class PickUpController : MonoBehaviour
         rigid.isKinematic = true;
         collider.isTrigger = true;
         
-        transform.SetParent(weaponContainer );
+        transform.SetParent(weaponContainer);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
         transform.localScale = Vector3.one;

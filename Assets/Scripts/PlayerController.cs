@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
         if (inputs.PlayerInteraction.Jump.triggered && grounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight);
-        } 
+        }
         controller.Move(velocity * Time.deltaTime);
     }
     
@@ -150,7 +150,8 @@ public class PlayerController : MonoBehaviour
             else
             {
                 Debug.Log("Drank energy drink");
-                PlayerHpSystem.EnergyDrink(30);
+                PlayerHpSystem.EnergyDrink(30f);
+                energyDrinkCount--;
             }
         }
     }

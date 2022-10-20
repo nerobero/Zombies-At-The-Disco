@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -28,8 +29,8 @@ public class ZombieAI : MonoBehaviour
     private Animator zombieAnimator;
 
     [SerializeField] private float zombieHealth = 15f;
-    private float meganHP;
 
+    private bool isMeganDead = false;
 
     // Start is called before the first frame update
     private void Start()
@@ -38,86 +39,88 @@ public class ZombieAI : MonoBehaviour
         walkSpeed = GetComponent<NavMeshAgent>().speed;
         zombieAnimator = GetComponent<Animator>();
         SwitchToState(State.Chill);
-        meganHP = new GameObject().AddComponent<HPSystem>().currentHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        DealDamage();
+        
+            switch (currentState)
+            {
+                case State.Chill:
+                    if (transitionActive)
+                    {
+                        currentDestination = transform.position;
+                        GetComponent<NavMeshAgent>().destination = currentDestination;
+                        Invoke("SwitchToWalk", Random.Range(5.0f, 6.0f));
+                        UpdateZombieAnimator(false, false, false);
+                        GetComponent<NavMeshAgent>().speed = 0f;
+                        transitionActive = false;
+                    }
 
-        switch (currentState)
-        {
-            case State.Chill:
-                if (transitionActive)
-                {
-                    currentDestination = transform.position;
+                    if (InView(megan, viewAngle, viewDistance))
+                    {
+                        SwitchToState(State.Run);
+                    }
+
+                    break;
+                case State.Walk:
+                    if (transitionActive)
+                    {
+                        currentDestination = ValidDestination();
+                        GetComponent<NavMeshAgent>().destination = currentDestination;
+                        UpdateZombieAnimator(true, false, false);
+                        GetComponent<NavMeshAgent>().speed = walkSpeed;
+                        transitionActive = false;
+                    }
+
+                    if ((transform.position - currentDestination).magnitude < 2.5f)
+                    {
+                        SwitchToState(State.Chill);
+                    }
+
+                    if (InView(megan, viewAngle, viewDistance))
+                    {
+                        SwitchToState(State.Run);
+                    }
+                    
+                    break;
+                case State.Run:
+                    if (transitionActive)
+                    {
+                        CancelInvoke("SwitchToWalk");
+                        Invoke("CheckForDeath", 10.0f);
+                        UpdateZombieAnimator(false, true, false);
+                        GetComponent<NavMeshAgent>().speed = runSpeed;
+                        transitionActive = false;
+                    }
+                    
+                    currentDestination = megan.transform.position;
                     GetComponent<NavMeshAgent>().destination = currentDestination;
-                    Invoke("SwitchToWalk", Random.Range(5.0f, 6.0f));
-                    UpdateZombieAnimator(false, false, false);
-                    GetComponent<NavMeshAgent>().speed = 0f;
-                    transitionActive = false;
-                }
 
-                if (InView(megan, viewAngle, viewDistance))
-                {
-                    SwitchToState(State.Run);
-                }
+                    if ((transform.position - currentDestination).magnitude < 2.5f)
+                    {
+                        CancelInvoke("CheckForDeath");
+                        CheckForDeath();
+                    }
 
-                break;
-            case State.Walk:
-                if (transitionActive)
-                {
-                    currentDestination = ValidDestination();
-                    GetComponent<NavMeshAgent>().destination = currentDestination;
-                    UpdateZombieAnimator(true, false, false);
-                    GetComponent<NavMeshAgent>().speed = walkSpeed;
-                    transitionActive = false;
-                }
-
-                if ((transform.position - currentDestination).magnitude < 2.5f)
-                {
-                    SwitchToState(State.Chill);
-                }
-
-                if (InView(megan, viewAngle, viewDistance))
-                {
-                    SwitchToState(State.Run);
-                }
-                
-                break;
-            case State.Run:
-                if (transitionActive)
-                {
-                    CancelInvoke("SwitchToWalk");
-                    Invoke("CheckForDeath", 10.0f);
-                    UpdateZombieAnimator(false, true, false);
-                    GetComponent<NavMeshAgent>().speed = runSpeed;
-                    transitionActive = false;
-                }
-                currentDestination = megan.transform.position;
-                GetComponent<NavMeshAgent>().destination = currentDestination;
-
-                if ((transform.position - currentDestination).magnitude < 2.5f)
-                {
-                    CancelInvoke("CheckForDeath");
-                    CheckForDeath();
-                }
-
-                if ((transform.position - megan.transform.position).magnitude > 60f)
-                {
-                    SwitchToState(State.Chill);
-                }
-                break;
-            case State.Die:
-                if (transitionActive)
-                {
-                    currentDestination = transform.position;
-                    GetComponent<NavMeshAgent>().speed = 0f;
-                    UpdateZombieAnimator(false, false, true);
-                }
-                break;
+                    if ((transform.position - megan.transform.position).magnitude > 60f)
+                    {
+                        SwitchToState(State.Chill);
+                    }
+                    break;
+                case State.Die:
+                    if (transitionActive)
+                    {
+                        currentDestination = transform.position;
+                        GetComponent<NavMeshAgent>().speed = 0f;
+                        UpdateZombieAnimator(false, false, true);
+                    }
+                    break;
+            
         }
+
+        
     }
     
     void CheckForDeath()
@@ -178,12 +181,12 @@ public class ZombieAI : MonoBehaviour
         return destination;
     }
 
-    void DealDamage()
+    private void OnCollisionEnter(Collision collision)
     {
-        if (GameObject.Find("Megan").GetComponent<CapsuleCollider>().radius - GetComponent<CapsuleCollider>().radius <=
-            1)
+        if (collision.transform.name == "Megan")//or tag
         {
-            meganHP -= 10f;
+            collision.gameObject.GetComponent<HPSystem>().TakeDamage(15f);
+            isMeganDead = true;
         }
     }
 }
