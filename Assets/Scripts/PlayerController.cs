@@ -252,7 +252,6 @@ public class PlayerController : MonoBehaviour
 
         inputs.PlayerInteraction.Run.performed += Run;
         inputs.PlayerInteraction.EndRun.performed += RunEnd;
-        inputs.PlayerInteraction.Attack.performed += Attack;
     }
 
 
@@ -381,6 +380,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+<<<<<<< HEAD
     
     private void Attack(InputAction.CallbackContext obj)
     {
@@ -395,3 +395,6 @@ public class PlayerController : MonoBehaviour
     }
 }
 >>>>>>> parent of 155bc50 (strike me with the bat senpai)
+=======
+}
+>>>>>>> parent of e67b2bc (amogus)
