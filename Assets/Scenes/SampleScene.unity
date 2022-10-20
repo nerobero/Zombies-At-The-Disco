@@ -918,6 +918,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5980734204435149271, guid: bf3a778932e3f964a8ae69d9108d380f, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 8766653248295850822}
     - target: {fileID: 7832451929605693680, guid: bf3a778932e3f964a8ae69d9108d380f, type: 3}
       propertyPath: cam
       value: 

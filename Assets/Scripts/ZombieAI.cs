@@ -30,8 +30,6 @@ public class ZombieAI : MonoBehaviour
 
     [SerializeField] private float zombieHealth = 15f;
 
-    private bool isBryceDead = false;
-
     // Start is called before the first frame update
     private void Start()
     {
@@ -186,7 +184,6 @@ public class ZombieAI : MonoBehaviour
         if (collision.transform.name == "Bryce")//or tag
         {
             collision.gameObject.GetComponent<PlayerController>().PlayerHpSystem.TakeDamage(15f);
-            isBryceDead = true;
         }
     }
 }
