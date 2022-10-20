@@ -120,6 +120,11 @@ public class ZombieAI : MonoBehaviour
             
         }
 
+            if (isBryceDead)
+            {
+                bryce = GameObject.Find("Zombie 1");
+            }
+
         
     }
     
