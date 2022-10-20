@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HPSystem
+public class HPSystem : MonoBehaviour
 {
     public float maxHealth = 100f;
     public float currentHealth = 100f;
