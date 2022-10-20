@@ -25,17 +25,17 @@ public class ZombieAI : MonoBehaviour
     private float viewAngle = 5f;
     private float viewDistance = 50f;
 
-    private GameObject megan;
+    private GameObject bryce;
     private Animator zombieAnimator;
 
     [SerializeField] private float zombieHealth = 15f;
 
-    private bool isMeganDead = false;
+    private bool isBryceDead = false;
 
     // Start is called before the first frame update
     private void Start()
     {
-        megan = GameObject.Find("Megan");
+        bryce = GameObject.Find("Bryce");
         walkSpeed = GetComponent<NavMeshAgent>().speed;
         zombieAnimator = GetComponent<Animator>();
         SwitchToState(State.Chill);
@@ -58,7 +58,7 @@ public class ZombieAI : MonoBehaviour
                         transitionActive = false;
                     }
 
-                    if (InView(megan, viewAngle, viewDistance))
+                    if (InView(bryce, viewAngle, viewDistance))
                     {
                         SwitchToState(State.Run);
                     }
@@ -79,7 +79,7 @@ public class ZombieAI : MonoBehaviour
                         SwitchToState(State.Chill);
                     }
 
-                    if (InView(megan, viewAngle, viewDistance))
+                    if (InView(bryce, viewAngle, viewDistance))
                     {
                         SwitchToState(State.Run);
                     }
@@ -95,7 +95,7 @@ public class ZombieAI : MonoBehaviour
                         transitionActive = false;
                     }
                     
-                    currentDestination = megan.transform.position;
+                    currentDestination = bryce.transform.position;
                     GetComponent<NavMeshAgent>().destination = currentDestination;
 
                     if ((transform.position - currentDestination).magnitude < 2.5f)
@@ -104,7 +104,7 @@ public class ZombieAI : MonoBehaviour
                         CheckForDeath();
                     }
 
-                    if ((transform.position - megan.transform.position).magnitude > 60f)
+                    if ((transform.position - bryce.transform.position).magnitude > 60f)
                     {
                         SwitchToState(State.Chill);
                     }
@@ -183,10 +183,10 @@ public class ZombieAI : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.name == "Megan")//or tag
+        if (collision.transform.name == "Bryce")//or tag
         {
             collision.gameObject.GetComponent<HPSystem>().TakeDamage(15f);
-            isMeganDead = true;
+            isBryceDead = true;
         }
     }
 }

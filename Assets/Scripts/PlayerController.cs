@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Transactions;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -47,10 +47,10 @@ public class PlayerController : MonoBehaviour
 
         inputs.PlayerInteraction.Run.performed += Run;
         inputs.PlayerInteraction.EndRun.performed += RunEnd;
-        
+
+        inputs.PlayerInteraction.Attack.performed += Attack;
+
     }
-
-
 
 
     // Start is called before the first frame update
@@ -167,5 +167,11 @@ public class PlayerController : MonoBehaviour
                 energyDrinkCount--;
             }
         }
+    }
+    
+    private void Attack(InputAction.CallbackContext obj)
+    {
+        Transform meleeTransform;
+        Collider[] hitZombies = Physics.OverlapSphere();
     }
 }
