@@ -170,6 +170,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                animator.SetBool("isDrink", true);
                 Debug.Log("Drank energy drink");
                 PlayerHpSystem.EnergyDrink(30f);
                 energyDrinkCount--;
