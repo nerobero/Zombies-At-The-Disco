@@ -21,12 +21,17 @@ MonoBehaviour:
   m_ShowMode: 4
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Title: Game
   m_RootView: {fileID: 2}
 =======
   m_Title: Inspector
   m_RootView: {fileID: 5}
 >>>>>>> 5b4fe2520e74219b5a1c4b1464418c4c25a99481
+=======
+  m_Title: Scene
+  m_RootView: {fileID: 2}
+>>>>>>> parent of 5b4fe25 (hewwo)
 =======
   m_Title: Scene
   m_RootView: {fileID: 2}
@@ -131,12 +136,17 @@ MonoBehaviour:
   vertical: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   controlID: 18
 --- !u!114 &6
 =======
   controlID: 82
 --- !u!114 &9
 >>>>>>> 5b4fe2520e74219b5a1c4b1464418c4c25a99481
+=======
+  controlID: 4745
+--- !u!114 &6
+>>>>>>> parent of 5b4fe25 (hewwo)
 =======
   controlID: 4745
 --- !u!114 &6
@@ -166,12 +176,17 @@ MonoBehaviour:
   vertical: 1
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   controlID: 19
 --- !u!114 &7
 =======
   controlID: 83
 --- !u!114 &10
 >>>>>>> 5b4fe2520e74219b5a1c4b1464418c4c25a99481
+=======
+  controlID: 4746
+--- !u!114 &7
+>>>>>>> parent of 5b4fe25 (hewwo)
 =======
   controlID: 4746
 --- !u!114 &7
@@ -201,12 +216,17 @@ MonoBehaviour:
   vertical: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   controlID: 66
 --- !u!114 &8
 =======
   controlID: 84
 --- !u!114 &11
 >>>>>>> 5b4fe2520e74219b5a1c4b1464418c4c25a99481
+=======
+  controlID: 4747
+--- !u!114 &8
+>>>>>>> parent of 5b4fe25 (hewwo)
 =======
   controlID: 4747
 --- !u!114 &8
@@ -440,6 +460,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
 <<<<<<< HEAD
+<<<<<<< HEAD
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
@@ -449,10 +470,15 @@ MonoBehaviour:
       m_ExpandedIDs: 12fbffff
 >>>>>>> 5b4fe2520e74219b5a1c4b1464418c4c25a99481
 =======
+=======
+>>>>>>> parent of 5b4fe25 (hewwo)
       scrollPos: {x: 0, y: 32}
       m_SelectedIDs: b0ecffff
       m_LastClickedID: -4944
       m_ExpandedIDs: b0ecffffcaf5ffffe6f5ffff22f7ffff1a640000826400009c640000
+<<<<<<< HEAD
+>>>>>>> parent of 5b4fe25 (hewwo)
+=======
 >>>>>>> parent of 5b4fe25 (hewwo)
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -757,6 +783,7 @@ MonoBehaviour:
   m_Size:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: 2.8509536
     speed: 2
     m_Value: 2.8509536
@@ -765,6 +792,11 @@ MonoBehaviour:
     speed: 2
     m_Value: 0.09604892
 >>>>>>> 5b4fe2520e74219b5a1c4b1464418c4c25a99481
+=======
+    m_Target: 1.992574
+    speed: 2
+    m_Value: 1.9970673
+>>>>>>> parent of 5b4fe25 (hewwo)
 =======
     m_Target: 1.992574
     speed: 2
@@ -914,6 +946,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_SelectedIDs: 64680000
     m_LastClickedID: 26724
     m_ExpandedIDs: 000000005a6800005c6800005e680000
@@ -922,6 +955,11 @@ MonoBehaviour:
     m_LastClickedID: 26056
     m_ExpandedIDs: 000000003c65000094650000ca65000000ca9a3b
 >>>>>>> 5b4fe2520e74219b5a1c4b1464418c4c25a99481
+=======
+    m_SelectedIDs: de670000
+    m_LastClickedID: 26590
+    m_ExpandedIDs: 000000008267000086670000fe670000
+>>>>>>> parent of 5b4fe25 (hewwo)
 =======
     m_SelectedIDs: de670000
     m_LastClickedID: 26590
@@ -956,10 +994,14 @@ MonoBehaviour:
     m_LastClickedID: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_ExpandedIDs: 000000005a6800005c6800005e680000
 =======
     m_ExpandedIDs: 000000003c650000
 >>>>>>> 5b4fe2520e74219b5a1c4b1464418c4c25a99481
+=======
+    m_ExpandedIDs: 000000008267000086670000fe670000
+>>>>>>> parent of 5b4fe25 (hewwo)
 =======
     m_ExpandedIDs: 000000008267000086670000fe670000
 >>>>>>> parent of 5b4fe25 (hewwo)
