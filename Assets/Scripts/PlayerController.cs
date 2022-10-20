@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
 
         inputs.PlayerInteraction.Run.performed += Run;
         inputs.PlayerInteraction.EndRun.performed += RunEnd;
+        inputs.PlayerInteraction.Attack.performed += Attack;
     }
 
 
@@ -181,6 +182,18 @@ public class PlayerController : MonoBehaviour
                 
                 energyDrinkCount--;
             }
+        }
+    }
+    
+    private void Attack(InputAction.CallbackContext obj)
+    {
+        animator.SetBool("isSwinging", true);
+        Collider[] hitZombies = Physics.OverlapSphere(meleeTransform.position, 10, zombieLayer);
+
+        foreach (Collider z in hitZombies)
+        {
+            Debug.Log("Hit Zombies");
+            z.GetComponent<HPSystem>().TakeDamage(10f);
         }
     }
 }
