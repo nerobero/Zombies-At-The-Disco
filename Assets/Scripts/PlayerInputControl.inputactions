@@ -51,18 +51,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "EnergyDrink",
+                    "name": "EndRun",
                     "type": "Button",
-                    "id": "0f837975-f3a4-4989-9e5e-cac1af2707f2",
+                    "id": "34079926-b586-4f03-95b6-d2c2d02bffcd",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "EndRun",
+                    "name": "EnergyDrink",
                     "type": "Button",
-                    "id": "34079926-b586-4f03-95b6-d2c2d02bffcd",
+                    "id": "0f837975-f3a4-4989-9e5e-cac1af2707f2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",

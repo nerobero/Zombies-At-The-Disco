@@ -13,10 +13,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera cam;
     
     public PlayerInputControl inputs;
-    private InputAction move;
+    private Animator anim;
 
-    private Animator anim; 
+
+    private InputAction attack;
     
+    [SerializeField] private HPSystem PlayerHpSystem;
+    private int energyDrinkCount = 15;
+    
+    //movement code
+    private InputAction move;
     private Vector3 moveDirection;
     private bool movementPressed;
     private Vector3 velocity;
@@ -39,8 +45,9 @@ public class PlayerController : MonoBehaviour
 
         inputs.PlayerInteraction.Run.performed += Run;
         inputs.PlayerInteraction.EndRun.performed += RunEnd;
-        NonMovementControls cont = new GameObject().AddComponent<NonMovementControls>();
+        
     }
+
 
 
 
@@ -61,7 +68,8 @@ public class PlayerController : MonoBehaviour
         Rotate(playerTransform, cameraTransform);
         
         Jump(playerTransform);
-        
+
+        Heal();
     }
 
     private void HandleRun(Transform playerTransform)
@@ -129,5 +137,21 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
        inputs.PlayerInteraction.Disable();
+    }
+    
+    private void Heal()
+    {
+        if (inputs.PlayerInteraction.EnergyDrink.triggered)
+        {
+            if (energyDrinkCount <= 0)
+            {
+                Debug.Log("Ran out of energy drinks");
+            }
+            else
+            {
+                Debug.Log("Drank energy drink");
+                PlayerHpSystem.EnergyDrink(30);
+            }
+        }
     }
 }

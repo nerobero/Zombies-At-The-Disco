@@ -6,8 +6,7 @@ public class HPSystem : MonoBehaviour
 {
     public float maxHealth = 100f;
     public float currentHealth;
-    
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,12 +26,13 @@ public class HPSystem : MonoBehaviour
 
     public void EnergyDrink(float replenished)
     {
+
         if (currentHealth + replenished >= maxHealth)
         {
             currentHealth = maxHealth;
         }
-        currentHealth += replenished;
-        
+        else currentHealth += replenished;
+
     }
     
     // Update is called once per frame
