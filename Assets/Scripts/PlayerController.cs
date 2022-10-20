@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
    public LayerMask zombieLayer;
 
-   public HPSystem PlayerHpSystem = new HPSystem();
+   public HPSystem PlayerHpSystem = new GameObject().AddComponent<HPSystem>();
    private int energyDrinkCount = 15;
 
    //movement code
@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
    {
        if (inputs.PlayerInteraction.Attack.triggered)
        {
-           animator.SetTrigger("attack");
+           animator.SetBool("isSwinging", true);
        }
    }
 
@@ -206,6 +206,7 @@ public class PlayerController : MonoBehaviour
            }
            else
            {
+               animator.SetBool("isDrink", true);
                Debug.Log("Drank energy drink");
                PlayerHpSystem.EnergyDrink(30f);
                energyDrinkCount--;
