@@ -62,5 +62,8 @@ crashlytics-build.properties
 .idea/.idea.Zombies-At-The-Disco.dir/.idea/encodings.xml
 .idea/.idea.Zombies-At-The-Disco.dir/.idea/indexLayout.xml
 *.xml
+<<<<<<< HEAD
 *.dwlt
 *.dwlt
+=======
+>>>>>>> parent of 5b4fe25 (hewwo)
