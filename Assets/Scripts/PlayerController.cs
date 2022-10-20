@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
    public LayerMask zombieLayer;
 
-   public HPSystem PlayerHpSystem = new GameObject().AddComponent<HPSystem>();
+   public HPSystem PlayerHpSystem;
    private int energyDrinkCount = 15;
 
    //movement code
@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
 
    void Awake()
    {
+       PlayerHpSystem = new GameObject().AddComponent<HPSystem>();
+       
        inputs = new PlayerInputControl();
 
        inputs.PlayerInteraction.Move.performed += context => { moveDirection = context.ReadValue<Vector3>(); };
