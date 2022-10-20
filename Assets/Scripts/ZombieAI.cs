@@ -185,7 +185,7 @@ public class ZombieAI : MonoBehaviour
     {
         if (collision.transform.name == "Bryce")//or tag
         {
-            collision.gameObject.GetComponent<HPSystem>().TakeDamage(15f);
+            collision.gameObject.GetComponent<PlayerController>().PlayerHpSystem.TakeDamage(15f);
             isBryceDead = true;
         }
     }

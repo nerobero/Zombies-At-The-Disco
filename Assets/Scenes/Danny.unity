@@ -189,6 +189,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 66026932}
   cam: {fileID: 1383115964}
+  meleeTransform: {fileID: 0}
+  zombieLayer:
+    serializedVersion: 2
+    m_Bits: 0
   PlayerHpSystem: {fileID: 0}
   speed: 20
   runSpeed: 60
@@ -776,6 +780,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 526961384}
   cam: {fileID: 1383115964}
+  meleeTransform: {fileID: 0}
+  zombieLayer:
+    serializedVersion: 2
+    m_Bits: 0
   PlayerHpSystem: {fileID: 0}
   speed: 5
   runSpeed: 15
@@ -809,7 +817,7 @@ Animator:
   m_GameObject: {fileID: 526961382}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 18ed07335cc2e499cae2e52b1b5de559, type: 2}
+  m_Controller: {fileID: 9100000, guid: a4cdf79c53ed529488a3b3c4e56191a2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1229,7 +1237,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 984133782}
-  m_LocalRotation: {x: 0.22975291, y: 0.000000016746089, z: -0.0000000039532155, w: 0.973249}
+  m_LocalRotation: {x: 0.22975291, y: -0.000000016746096, z: 0.0000000039532173, w: 0.973249}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1307,7 +1315,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027275322}
-  m_LocalRotation: {x: 0.19424808, y: 0.000000018870892, z: -0.0000000037368117, w: 0.98095244}
+  m_LocalRotation: {x: 0.19424808, y: -0.000000018870892, z: 0.0000000037368117, w: 0.98095244}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2319,6 +2327,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 2079131289}
   cam: {fileID: 1383115964}
+  meleeTransform: {fileID: 0}
+  zombieLayer:
+    serializedVersion: 2
+    m_Bits: 0
   PlayerHpSystem: {fileID: 0}
   speed: 20
   runSpeed: 60

@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HPSystem : MonoBehaviour
+public class HPSystem
 {
     public float maxHealth = 100f;
-    public float currentHealth;
+    public float currentHealth = 100f;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +18,7 @@ public class HPSystem : MonoBehaviour
         if (currentHealth <= 0f)
         {
             Debug.Log("Player died.");
-            Destroy(gameObject);
+            // Destroy(gameObject);
         }
     }
 

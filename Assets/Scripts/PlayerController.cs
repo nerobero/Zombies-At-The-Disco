@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask zombieLayer;
 
-    [SerializeField] private HPSystem PlayerHpSystem;
+    public HPSystem PlayerHpSystem = new HPSystem();
     private int energyDrinkCount = 15;
 
     //movement code
@@ -69,17 +69,23 @@ public class PlayerController : MonoBehaviour
         Rotate(playerTransform, cameraTransform);
 
         Jump(playerTransform);
+        
+        Attack();
+        
+   
 
         Heal();
         
         CheckForDeath();
+        
     }
 
     private void CheckForDeath()
     {
-        if (GetComponent<HPSystem>().currentHealth - 10f <= 0.01)
+        if (PlayerHpSystem.currentHealth - 10f <= 0.01)
         {
             animator.SetBool("isDead", true);
+            Destroy(gameObject);
         }
     }
     
@@ -136,6 +142,14 @@ public class PlayerController : MonoBehaviour
         }
 
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void Attack()
+    {
+        if (inputs.PlayerInteraction.Attack.triggered)
+        {
+            animator.SetTrigger("attack");
+        }
     }
 
     private void Rotate(Transform playerTransform, Transform cameraTransform)
