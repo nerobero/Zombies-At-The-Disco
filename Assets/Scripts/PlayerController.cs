@@ -51,8 +51,10 @@ public class PlayerController : MonoBehaviour
 
        inputs.PlayerInteraction.Run.performed += Run;
        inputs.PlayerInteraction.EndRun.performed += RunEnd;
-   }
 
+       inputs.PlayerInteraction.Attack.performed += Attack;
+   }
+   
 
    // Start is called before the first frame update
    void Start()
@@ -71,9 +73,7 @@ public class PlayerController : MonoBehaviour
        Rotate(playerTransform, cameraTransform);
 
        Jump(playerTransform);
-       
-       Attack();
-       
+
        Heal();
       
        CheckForDeath();
@@ -164,17 +164,17 @@ public class PlayerController : MonoBehaviour
    }
    
    // TODO: What Angela had previously
-   // private void Attack(InputAction.CallbackContext obj)
-   // {
-   //     animator.SetBool("isSwinging", true);
-   //     Collider[] hitZombies = Physics.OverlapSphere(meleeTransform.position, 10, zombieLayer);
-   //
-   //     foreach (Collider z in hitZombies)
-   //     {
-   //         Debug.Log("Hit Zombies");
-   //         z.GetComponent<HPSystem>().TakeDamage(10f);
-   //     }
-   // }
+   private void Attack(InputAction.CallbackContext obj)
+   {
+       animator.SetBool("isSwinging", true);
+       Collider[] hitZombies = Physics.OverlapSphere(meleeTransform.position, 10, zombieLayer);
+   
+       foreach (Collider z in hitZombies)
+       {
+           Debug.Log("Hit Zombies");
+           z.GetComponent<HPSystem>().TakeDamage(10f);
+       }
+   }
 
    private void Rotate(Transform playerTransform, Transform cameraTransform)
    {
