@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     private bool grounded;
     private float groundCastDist = 5f;
     private bool isRunning;
+
+    public Animator animator;
     
     void Awake()
     {
@@ -76,6 +78,15 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 movement = (playerTransform.right * moveDirection.x)
                            + (playerTransform.forward * moveDirection.z);
+
+        if (movement.magnitude > 0.1)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
         
         if (isRunning)
         {
@@ -120,11 +131,13 @@ public class PlayerController : MonoBehaviour
     
     private void Run(InputAction.CallbackContext obj)
     {
+        animator.SetBool("isRunning", true);
         isRunning = true;
     }
 
     private void RunEnd(InputAction.CallbackContext obj)
     {
+        animator.SetBool("isRunning", false);
         isRunning = false;
     }
 
