@@ -4,23 +4,28 @@ using System.Collections.Generic;
 using System.Transactions;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private CharacterController controller;
-    
+
     [SerializeField] private Camera cam;
-    
+
     public PlayerInputControl inputs;
     private Animator anim;
 
+    [SerializeField] private Transform meleeTransform;
+
 
     private InputAction attack;
-    
+
+    public LayerMask zombieLayer;
+
     [SerializeField] private HPSystem PlayerHpSystem;
     private int energyDrinkCount = 15;
-    
+
     //movement code
     private InputAction move;
     private Vector3 moveDirection;
@@ -33,23 +38,17 @@ public class PlayerController : MonoBehaviour
     private bool grounded;
     private float groundCastDist = 5f;
     private bool isRunning;
-
+    private bool isAttack;
     public Animator animator;
-    
+
     void Awake()
     {
         inputs = new PlayerInputControl();
-        
-        inputs.PlayerInteraction.Move.performed += context =>
-        {
-            moveDirection = context.ReadValue<Vector3>();
-        };
+
+        inputs.PlayerInteraction.Move.performed += context => { moveDirection = context.ReadValue<Vector3>(); };
 
         inputs.PlayerInteraction.Run.performed += Run;
         inputs.PlayerInteraction.EndRun.performed += RunEnd;
-
-        inputs.PlayerInteraction.Attack.performed += Attack;
-
     }
 
 
@@ -66,13 +65,29 @@ public class PlayerController : MonoBehaviour
         HandleMovement(playerTransform);
 
         HandleRun(playerTransform);
-        
+
         Rotate(playerTransform, cameraTransform);
-        
+
         Jump(playerTransform);
 
         Heal();
+        
+        CheckForDeath();
     }
+
+    private void CheckForDeath()
+    {
+        if (GetComponent<HPSystem>().currentHealth - 10f <= 0.01)
+        {
+            animator.SetBool("isDead", true);
+        }
+    }
+    
+    public void DeadCompleted()
+    {
+        Destroy(gameObject);
+    }
+
 
     private void HandleRun(Transform playerTransform)
     {
@@ -87,12 +102,12 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("isWalking", false);
         }
-        
+
         if (isRunning)
         {
             controller.Move(movement * (runSpeed * Time.deltaTime));
         }
-        
+
         if (!isRunning)
         {
             controller.Move(movement * (speed * Time.deltaTime));
@@ -104,31 +119,32 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 movement = (playerTransform.right * moveDirection.x)
                            + (playerTransform.forward * moveDirection.z);
-        
+
         // Vector3 movement = (playerTransform.forward * moveDirection.z); //non strafing
-        
+
         controller.Move(movement * (speed * Time.deltaTime));
     }
 
     private void Jump(Transform playerTransform)
     {
         grounded = Physics.Raycast(playerTransform.position, Vector3.down, groundCastDist);
-        
-        velocity.y += gravity * Time.deltaTime; 
+
+        velocity.y += gravity * Time.deltaTime;
         if (inputs.PlayerInteraction.Jump.triggered && grounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight);
         }
+
         controller.Move(velocity * Time.deltaTime);
     }
-    
+
     private void Rotate(Transform playerTransform, Transform cameraTransform)
     {
         playerTransform.rotation = Quaternion.AngleAxis(cameraTransform.eulerAngles.y, Vector3.up);
         // playerTransform.rotation = Quaternion.AngleAxis(playerTransform.eulerAngles.y 
         //                                                 + (moveDirection.x *3), Vector3.up);
     }
-    
+
     private void Run(InputAction.CallbackContext obj)
     {
         animator.SetBool("isRunning", true);
@@ -141,7 +157,7 @@ public class PlayerController : MonoBehaviour
         isRunning = false;
     }
 
-    
+
     private void OnEnable()
     {
         inputs.PlayerInteraction.Enable();
@@ -149,9 +165,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-       inputs.PlayerInteraction.Disable();
+        inputs.PlayerInteraction.Disable();
     }
-    
+
     private void Heal()
     {
         if (inputs.PlayerInteraction.EnergyDrink.triggered)
@@ -167,11 +183,5 @@ public class PlayerController : MonoBehaviour
                 energyDrinkCount--;
             }
         }
-    }
-    
-    private void Attack(InputAction.CallbackContext obj)
-    {
-        Transform meleeTransform;
-        Collider[] hitZombies = Physics.OverlapSphere();
     }
 }
