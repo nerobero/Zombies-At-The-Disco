@@ -71,11 +71,9 @@ public class PlayerController : MonoBehaviour
        Rotate(playerTransform, cameraTransform);
 
        Jump(playerTransform);
-      
+       
        Attack();
-      
- 
-
+       
        Heal();
       
        CheckForDeath();
@@ -107,10 +105,7 @@ public class PlayerController : MonoBehaviour
        animator.SetBool("isDrink", false);
    }
 
-
-
-
-
+   
    private void HandleRun(Transform playerTransform)
    {
        Vector3 movement = (playerTransform.right * moveDirection.x)
@@ -167,6 +162,19 @@ public class PlayerController : MonoBehaviour
            animator.SetBool("isSwinging", true);
        }
    }
+   
+   // TODO: What Angela had previously
+   // private void Attack(InputAction.CallbackContext obj)
+   // {
+   //     animator.SetBool("isSwinging", true);
+   //     Collider[] hitZombies = Physics.OverlapSphere(meleeTransform.position, 10, zombieLayer);
+   //
+   //     foreach (Collider z in hitZombies)
+   //     {
+   //         Debug.Log("Hit Zombies");
+   //         z.GetComponent<HPSystem>().TakeDamage(10f);
+   //     }
+   // }
 
    private void Rotate(Transform playerTransform, Transform cameraTransform)
    {
