@@ -140,6 +140,8 @@ public class ZombieAI : MonoBehaviour
     {
         Destroy(gameObject);
     }
+    
+    
 
     private void OnDisable()
     {
