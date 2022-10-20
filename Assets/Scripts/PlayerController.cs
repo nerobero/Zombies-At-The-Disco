@@ -284,11 +284,6 @@ public class PlayerController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void DrinkComplete()
-    {
-        animator.SetBool("isDrink", false);
-    }
-
 
     private void HandleRun(Transform playerTransform)
     {
@@ -382,7 +377,6 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("isDrink", true);
                 Debug.Log("Drank energy drink");
                 PlayerHpSystem.EnergyDrink(30f);
-                
                 energyDrinkCount--;
             }
         }
