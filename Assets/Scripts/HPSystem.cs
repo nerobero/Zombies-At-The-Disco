@@ -6,6 +6,7 @@ public class HPSystem : MonoBehaviour
 {
     public float maxHealth = 100f;
     public float currentHealth;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,7 @@ public class HPSystem : MonoBehaviour
         if (currentHealth <= 0f)
         {
             Debug.Log("Player died.");
-            Destroy(gameObject);
+            animator.SetBool("isDead", true);
         }
     }
 

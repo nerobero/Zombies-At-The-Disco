@@ -72,18 +72,10 @@ public class PlayerController : MonoBehaviour
 
         Heal();
         
-        CheckForDeath();
-    }
-
-    private void CheckForDeath()
-    {
-        if (GetComponent<HPSystem>().currentHealth - 10f <= 0.01)
-        {
-            animator.SetBool("isDead", true);
-        }
     }
     
-    public void DeadCompleted()
+    
+    public void DeadComplete()
     {
         Destroy(gameObject);
     }
