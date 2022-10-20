@@ -85,6 +85,11 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("isDrink", false);
     }
+    
+    public void SwingComplete()
+    {
+        animator.SetBool("isSwinging", false);
+    }
 
 
     private void HandleRun(Transform playerTransform)
