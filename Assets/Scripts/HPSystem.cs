@@ -5,15 +5,19 @@ public class HPSystem : MonoBehaviour
    public float maxHealth = 100f;
    public float currentHealth = 100f;
 
+   public HealthBarScript healthbar;
+
    // Start is called before the first frame update
    void Start()
    {
        currentHealth = maxHealth;
+       healthbar.setMaxHealth(currentHealth);
    }
 
    public void TakeDamage(float damageDealt)
    {
        currentHealth -= damageDealt;
+       healthbar.setHealth(currentHealth);
 
        if (currentHealth <= 0f)
        {
@@ -30,6 +34,7 @@ public class HPSystem : MonoBehaviour
            currentHealth = maxHealth;
        }
        else currentHealth += replenished;
+       healthbar.setHealth(currentHealth);
 
    }
   

@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class PickUpController : MonoBehaviour
 {
-    //from youtube 
-    // public Weapon weaponScript;
+    //interpolated from youtube 
 
     public Rigidbody rigid;
 
-    public BoxCollider collider;
+    public Collider collider;
 
     public Transform player;
     public Transform weaponContainer;
@@ -19,14 +18,18 @@ public class PickUpController : MonoBehaviour
 
     public float dropForce;
 
-    public bool equipped;
+    public bool equipped = false;
+
+    public WeaponScript weapon;
+    public PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
     {
         if (!equipped)
         {
-            // weaponScript.enabled = false;
+            
+            weapon.enabled = false;
             rigid.isKinematic = false;
             collider.isTrigger = false;
         }
@@ -36,7 +39,7 @@ public class PickUpController : MonoBehaviour
     void Update()
     {
         Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickupRange && Input.GetKeyDown(KeyCode.E) )
+        if (!equipped && distanceToPlayer.magnitude <= pickupRange && Input.GetKeyDown(KeyCode.Q) )
         {
             PickUp();
         }
@@ -54,7 +57,8 @@ public class PickUpController : MonoBehaviour
         transform.localScale = Vector3.one;
         ;
 
-        // weaponScript.enabled = true;
+        weapon.enabled = true;
+        playerController.weaponScript = weapon;
     }
     
 }

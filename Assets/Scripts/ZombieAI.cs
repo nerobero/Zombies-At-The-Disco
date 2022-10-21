@@ -115,6 +115,7 @@ public class ZombieAI : MonoBehaviour
                         currentDestination = transform.position;
                         GetComponent<NavMeshAgent>().speed = 0f;
                         UpdateZombieAnimator(false, false, true);
+                        Debug.Log("dead");
                     }
                     break;
             
@@ -130,8 +131,10 @@ public class ZombieAI : MonoBehaviour
     
     void CheckForDeath()
     {
-        if (zombieHealth - 10f <= 0.01)
+        if (zombieHealth <= 0)
         {
+            
+           
             SwitchToState(State.Die);
         } 
     }
@@ -195,5 +198,12 @@ public class ZombieAI : MonoBehaviour
             collision.gameObject.GetComponent<PlayerController>().PlayerHpSystem.TakeDamage(15f);
             isBryceDead = true;
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        this.zombieHealth -= damage;
+        Debug.Log("zombie taking damage health now " + this.zombieHealth); 
+        
     }
 }

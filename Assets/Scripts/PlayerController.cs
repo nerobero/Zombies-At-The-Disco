@@ -17,12 +17,9 @@ public class PlayerController : MonoBehaviour
    private Animator anim;
 
    [SerializeField] private Transform meleeTransform;
-
-
+   
    private InputAction attack;
-
-   public LayerMask zombieLayer;
-
+   
    public HPSystem PlayerHpSystem;
    private int energyDrinkCount = 15;
 
@@ -40,10 +37,12 @@ public class PlayerController : MonoBehaviour
    private bool isRunning;
    private bool isAttack;
    public Animator animator;
-
+   
+   public WeaponScript weaponScript;
+   
    void Awake()
    {
-       PlayerHpSystem = new GameObject().AddComponent<HPSystem>();
+       // PlayerHpSystem = new GameObject().AddComponent<HPSystem>();
        
        inputs = new PlayerInputControl();
 
@@ -73,7 +72,6 @@ public class PlayerController : MonoBehaviour
        Jump(playerTransform);
        
        Attack();
-       
        Heal();
       
        CheckForDeath();
@@ -85,7 +83,7 @@ public class PlayerController : MonoBehaviour
        if (PlayerHpSystem.currentHealth - 10f <= 0.01)
        {
            animator.SetBool("isDead", true);
-           Destroy(gameObject);
+           // Destroy(gameObject);
        }
    }
   
@@ -93,13 +91,7 @@ public class PlayerController : MonoBehaviour
    {
        Destroy(gameObject);
    }
-   
-       
-   public void SwingComplete()
-   {
-       animator.SetBool("isSwinging", false);
-   }
-   
+
    public void DrinkComplete()
    {
        animator.SetBool("isDrink", false);
@@ -150,6 +142,16 @@ public class PlayerController : MonoBehaviour
        if (inputs.PlayerInteraction.Jump.triggered && grounded)
        {
            velocity.y = Mathf.Sqrt(jumpHeight);
+           
+       }
+
+       if (grounded)
+       {
+           animator.SetBool("isGrounded", true);
+       }
+       else
+       {
+           animator.SetBool("isGrounded", false);  
        }
 
        controller.Move(velocity * Time.deltaTime);
@@ -157,9 +159,9 @@ public class PlayerController : MonoBehaviour
 
    private void Attack()
    {
-       if (inputs.PlayerInteraction.Attack.triggered)
+       if (inputs.PlayerInteraction.Attack.triggered && weaponScript != null)
        {
-           animator.SetBool("isSwinging", true);
+           weaponScript.Attack(animator);
        }
    }
    
@@ -210,17 +212,17 @@ public class PlayerController : MonoBehaviour
    {
        if (inputs.PlayerInteraction.EnergyDrink.triggered)
        {
-           if (energyDrinkCount <= 0)
-           {
-               Debug.Log("Ran out of energy drinks");
-           }
-           else
-           {
-               animator.SetBool("isDrink", true);
-               Debug.Log("Drank energy drink");
-               PlayerHpSystem.EnergyDrink(30f);
-               energyDrinkCount--;
-           }
+           // if (energyDrinkCount <= 0)
+           // {
+           //     Debug.Log("Ran out of energy drinks");
+           // }
+           // else
+           // {
+           //     animator.SetBool("isDrink", true);
+           //     Debug.Log("Drank energy drink");
+           //     PlayerHpSystem.EnergyDrink(30f);
+           //     energyDrinkCount--;
+           // }
        }
    }
 }
