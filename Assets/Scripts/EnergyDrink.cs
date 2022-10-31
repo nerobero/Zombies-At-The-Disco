@@ -18,6 +18,8 @@ public class EnergyDrink : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if the object is within the pickup range and the player presses E key,
+        //the player character picks up the energy drink object from the map
         Vector3 distanceToPlayer = player.position - transform.position;
         if (distanceToPlayer.magnitude <= pickupRange && Input.GetKeyDown(KeyCode.E) )
         {
@@ -28,6 +30,8 @@ public class EnergyDrink : MonoBehaviour
     // Start is called before the first frame update
     void PickUp()
     {
+        //when the player picks up the energy drink, 
+        //the healing effect takes place instantaneously
         playerController.animator.SetBool("isDrink", true);
         
         Debug.Log("Drank energy drink");

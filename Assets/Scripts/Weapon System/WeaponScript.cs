@@ -25,11 +25,6 @@ public class WeaponScript : MonoBehaviour
             enemy.GetComponent<ZombieAI>().TakeDamage(damageAmount);
 
         }
-        // Vector3 distanceToPlayer = player.position - transform.position;
-        // if (!equipped && distanceToPlayer.magnitude <= pickupRange && Input.GetKeyDown(KeyCode.E) )
-        // {
-        //     PickUp();
-        // }
     }
 
     private void OnDrawGizmosSelected()

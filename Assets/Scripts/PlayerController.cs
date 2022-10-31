@@ -9,220 +9,204 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-   [SerializeField] private CharacterController controller;
+    [SerializeField] private CharacterController controller;
 
-   [SerializeField] private Camera cam;
+    [SerializeField] private Camera cam;
 
-   public PlayerInputControl inputs;
-   private Animator anim;
+    public PlayerInputControl inputs;
+    private Animator anim;
 
-   [SerializeField] private Transform meleeTransform;
-   
-   private InputAction attack;
-   
-   public HPSystem PlayerHpSystem;
-   private int energyDrinkCount = 15;
+    [SerializeField] private Transform meleeTransform;
 
-   //movement code
-   private InputAction move;
-   private Vector3 moveDirection;
-   private bool movementPressed;
-   private Vector3 velocity;
-   private float gravity = -9.8f;
-   public float speed = 20f;
-   public float runSpeed = 60f;
-   public float jumpHeight = 20f;
-   private bool grounded;
-   private float groundCastDist = 5f;
-   private bool isRunning;
-   private bool isAttack;
-   public Animator animator;
-   
-   public WeaponScript weaponScript;
-   
-   void Awake()
-   {
-       // PlayerHpSystem = new GameObject().AddComponent<HPSystem>();
-       
-       inputs = new PlayerInputControl();
+    private InputAction attack;
 
-       inputs.PlayerInteraction.Move.performed += context => { moveDirection = context.ReadValue<Vector3>(); };
+    public HPSystem PlayerHpSystem;
+    private int energyDrinkCount = 15;
 
-       inputs.PlayerInteraction.Run.performed += Run;
-       inputs.PlayerInteraction.EndRun.performed += RunEnd;
-   }
+    //movement code
+    private InputAction move;
+    private Vector3 moveDirection;
+    private bool movementPressed;
+    private Vector3 velocity;
+    private float gravity = -9.8f;
+    public float speed = 20f;
+    public float runSpeed = 60f;
+    public float jumpHeight = 20f;
+    private bool grounded;
+    private float groundCastDist = 5f;
+    private bool isRunning;
+    private bool isAttack;
+    public Animator animator;
 
+    public WeaponScript weaponScript;
 
-   // Start is called before the first frame update
-   void Start()
-   {
-   }
+    void Awake()
+    {
+        // PlayerHpSystem = new GameObject().AddComponent<HPSystem>();
 
-   // Update is called once per frame
-   void Update()
-   {
-       Transform playerTransform = transform;
-       Transform cameraTransform = cam.transform;
-       HandleMovement(playerTransform);
+        inputs = new PlayerInputControl();
 
-       HandleRun(playerTransform);
+        inputs.PlayerInteraction.Move.performed += context => { moveDirection = context.ReadValue<Vector3>(); };
 
-       Rotate(playerTransform, cameraTransform);
-
-       Jump(playerTransform);
-       
-       Attack();
-       Heal();
-      
-       CheckForDeath();
-      
-   }
-
-   private void CheckForDeath()
-   {
-       if (PlayerHpSystem.currentHealth - 10f <= 0.01)
-       {
-           animator.SetBool("isDead", true);
-           // Destroy(gameObject);
-       }
-   }
-  
-   public void DeadCompleted()
-   {
-       Destroy(gameObject);
-   }
-
-   public void DrinkComplete()
-   {
-       animator.SetBool("isDrink", false);
-   }
-
-   
-   private void HandleRun(Transform playerTransform)
-   {
-       Vector3 movement = (playerTransform.right * moveDirection.x)
-                          + (playerTransform.forward * moveDirection.z);
-
-       if (movement.magnitude > 0.1)
-       {
-           animator.SetBool("isWalking", true);
-       }
-       else
-       {
-           animator.SetBool("isWalking", false);
-       }
-
-       if (isRunning)
-       {
-           controller.Move(movement * (runSpeed * Time.deltaTime));
-       }
-
-       if (!isRunning)
-       {
-           controller.Move(movement * (speed * Time.deltaTime));
-       }
-   }
+        inputs.PlayerInteraction.Run.performed += Run;
+        inputs.PlayerInteraction.EndRun.performed += RunEnd;
+    }
 
 
-   void HandleMovement(Transform playerTransform)
-   {
-       Vector3 movement = (playerTransform.right * moveDirection.x)
-                          + (playerTransform.forward * moveDirection.z);
+    // Start is called before the first frame update
+    void Start()
+    {
+    }
 
-       // Vector3 movement = (playerTransform.forward * moveDirection.z); //non strafing
+    // Update is called once per frame
+    void Update()
+    {
+        Transform playerTransform = transform;
+        Transform cameraTransform = cam.transform;
+        HandleMovement(playerTransform);
 
-       controller.Move(movement * (speed * Time.deltaTime));
-   }
+        HandleRun(playerTransform);
 
-   private void Jump(Transform playerTransform)
-   {
-       grounded = Physics.Raycast(playerTransform.position, Vector3.down, groundCastDist);
+        Rotate(playerTransform, cameraTransform);
 
-       velocity.y += gravity * Time.deltaTime;
-       if (inputs.PlayerInteraction.Jump.triggered && grounded)
-       {
-           velocity.y = Mathf.Sqrt(jumpHeight);
-           
-       }
+        Jump(playerTransform);
 
-       if (grounded)
-       {
-           animator.SetBool("isGrounded", true);
-       }
-       else
-       {
-           animator.SetBool("isGrounded", false);  
-       }
+        Attack();
 
-       controller.Move(velocity * Time.deltaTime);
-   }
+        CheckForDeath();
 
-   private void Attack()
-   {
-       if (inputs.PlayerInteraction.Attack.triggered && weaponScript != null)
-       {
-           weaponScript.Attack(animator);
-       }
-   }
-   
-   // TODO: What Angela had previously
-   // private void Attack(InputAction.CallbackContext obj)
-   // {
-   //     animator.SetBool("isSwinging", true);
-   //     Collider[] hitZombies = Physics.OverlapSphere(meleeTransform.position, 10, zombieLayer);
-   //
-   //     foreach (Collider z in hitZombies)
-   //     {
-   //         Debug.Log("Hit Zombies");
-   //         z.GetComponent<HPSystem>().TakeDamage(10f);
-   //     }
-   // }
+    }
 
-   private void Rotate(Transform playerTransform, Transform cameraTransform)
-   {
-       playerTransform.rotation = Quaternion.AngleAxis(cameraTransform.eulerAngles.y, Vector3.up);
-       // playerTransform.rotation = Quaternion.AngleAxis(playerTransform.eulerAngles.y
-       //                                                 + (moveDirection.x *3), Vector3.up);
-   }
+    private void CheckForDeath()
+    {
+        if (PlayerHpSystem.currentHealth - 10f <= 0.01)
+        {
+            animator.SetBool("isDead", true);
+            // Destroy(gameObject);
+        }
+    }
 
-   private void Run(InputAction.CallbackContext obj)
-   {
-       animator.SetBool("isRunning", true);
-       isRunning = true;
-   }
+    public void DeadCompleted()
+    {
+        Destroy(gameObject);
+    }
 
-   private void RunEnd(InputAction.CallbackContext obj)
-   {
-       animator.SetBool("isRunning", false);
-       isRunning = false;
-   }
+    public void DrinkComplete()
+    {
+        animator.SetBool("isDrink", false);
+    }
 
 
-   private void OnEnable()
-   {
-       inputs.PlayerInteraction.Enable();
-   }
+    private void HandleRun(Transform playerTransform)
+    {
+        Vector3 movement = (playerTransform.right * moveDirection.x)
+                           + (playerTransform.forward * moveDirection.z);
 
-   private void OnDisable()
-   {
-       inputs.PlayerInteraction.Disable();
-   }
+        if (movement.magnitude > 0.1)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
 
-   private void Heal()
-   {
-       if (inputs.PlayerInteraction.EnergyDrink.triggered)
-       {
-           // if (energyDrinkCount <= 0)
-           // {
-           //     Debug.Log("Ran out of energy drinks");
-           // }
-           // else
-           // {
-           //     animator.SetBool("isDrink", true);
-           //     Debug.Log("Drank energy drink");
-           //     PlayerHpSystem.EnergyDrink(30f);
-           //     energyDrinkCount--;
-           // }
-       }
-   }
+        if (isRunning)
+        {
+            controller.Move(movement * (runSpeed * Time.deltaTime));
+        }
+
+        if (!isRunning)
+        {
+            controller.Move(movement * (speed * Time.deltaTime));
+        }
+    }
+
+
+    void HandleMovement(Transform playerTransform)
+    {
+        Vector3 movement = (playerTransform.right * moveDirection.x)
+                           + (playerTransform.forward * moveDirection.z);
+
+        // Vector3 movement = (playerTransform.forward * moveDirection.z); //non strafing
+
+        controller.Move(movement * (speed * Time.deltaTime));
+    }
+
+    private void Jump(Transform playerTransform)
+    {
+        grounded = Physics.Raycast(playerTransform.position, Vector3.down, groundCastDist);
+
+        velocity.y += gravity * Time.deltaTime;
+        if (inputs.PlayerInteraction.Jump.triggered && grounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight);
+
+        }
+
+        if (grounded)
+        {
+            animator.SetBool("isGrounded", true);
+        }
+        else
+        {
+            animator.SetBool("isGrounded", false);
+        }
+
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void Attack()
+    {
+        if (inputs.PlayerInteraction.Attack.triggered && weaponScript != null)
+        {
+            weaponScript.Attack(animator);
+        }
+    }
+
+    // TODO: What Angela had previously
+    // private void Attack(InputAction.CallbackContext obj)
+    // {
+    //     animator.SetBool("isSwinging", true);
+    //     Collider[] hitZombies = Physics.OverlapSphere(meleeTransform.position, 10, zombieLayer);
+    //
+    //     foreach (Collider z in hitZombies)
+    //     {
+    //         Debug.Log("Hit Zombies");
+    //         z.GetComponent<HPSystem>().TakeDamage(10f);
+    //     }
+    // }
+
+    private void Rotate(Transform playerTransform, Transform cameraTransform)
+    {
+        playerTransform.rotation = Quaternion.AngleAxis(cameraTransform.eulerAngles.y, Vector3.up);
+        // playerTransform.rotation = Quaternion.AngleAxis(playerTransform.eulerAngles.y
+        //                                                 + (moveDirection.x *3), Vector3.up);
+    }
+
+    private void Run(InputAction.CallbackContext obj)
+    {
+        animator.SetBool("isRunning", true);
+        isRunning = true;
+    }
+
+    private void RunEnd(InputAction.CallbackContext obj)
+    {
+        animator.SetBool("isRunning", false);
+        isRunning = false;
+    }
+
+
+    private void OnEnable()
+    {
+        inputs.PlayerInteraction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputs.PlayerInteraction.Disable();
+    }
+
 }
+
+ 
