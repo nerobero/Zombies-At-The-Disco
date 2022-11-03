@@ -4,9 +4,9 @@ using UnityEngine.AI;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
-public class ZombieAI : MonoBehaviour
+public class ZombieAIBase : MonoBehaviour
 {
-    private enum State
+    protected enum State
     {
         Chill,
         Walk,
@@ -15,25 +15,25 @@ public class ZombieAI : MonoBehaviour
     }
 
     [SerializeField] private State currentState;
-    private bool transitionActive;
+    protected bool transitionActive;
 
-    [SerializeField] private Vector3 currentDestination;
+    [SerializeField] protected Vector3 currentDestination;
 
-    [SerializeField] private float runSpeed;
-    private float walkSpeed = 5f;
+    [SerializeField] protected float runSpeed;
+    protected float walkSpeed;
 
-    private float viewAngle = 5f;
-    private float viewDistance = 50f;
+    protected float viewAngle = 5f;
+    protected float viewDistance = 50f;
 
-    private GameObject bryce;
-    private Animator zombieAnimator;
+    protected GameObject bryce;
+    protected Animator zombieAnimator;
 
-    [SerializeField] private float zombieHealth = 15f;
+    [SerializeField] protected float zombieHealth = 15f;
 
-    private bool isBryceDead = false;
+    protected bool isBryceDead = false;
 
     // Start is called before the first frame update
-    private void Start()
+    public void Start()
     {
         bryce = GameObject.Find("Bryce");
         walkSpeed = GetComponent<NavMeshAgent>().speed;
@@ -143,7 +143,7 @@ public class ZombieAI : MonoBehaviour
     
     
 
-    private void OnDisable()
+    protected void OnDisable()
     {
         CancelInvoke("SwitchToWalk");
         CancelInvoke("CheckForDeath");
@@ -151,7 +151,7 @@ public class ZombieAI : MonoBehaviour
         
     }
     
-    void SwitchToState(State newState)
+    protected void SwitchToState(State newState)
     {
         transitionActive = true;
         currentState = newState;
@@ -188,7 +188,7 @@ public class ZombieAI : MonoBehaviour
         return destination;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.name == "Bryce")//or tag
         {
