@@ -19,7 +19,7 @@ public class ZombieAIBase : MonoBehaviour
 
     [SerializeField] protected Vector3 currentDestination;
 
-    [SerializeField] protected float runSpeed;
+     protected float runSpeed = 15f; 
     protected float walkSpeed;
 
     protected float viewAngle = 5f;
@@ -28,7 +28,7 @@ public class ZombieAIBase : MonoBehaviour
     protected GameObject bryce;
     protected Animator zombieAnimator;
 
-    [SerializeField] protected float zombieHealth = 15f;
+    protected float zombieHealth = 15f;
 
     protected bool isBryceDead = false;
 

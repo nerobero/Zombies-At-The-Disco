@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44671863, g: 0.496575, b: 0.5750147, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -339,8 +339,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4277869369700331501, guid: dd942d35c806f4c72b8477eacdc69dc3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd942d35c806f4c72b8477eacdc69dc3, type: 3}
+--- !u!1 &813585476 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1210972520514947036, guid: dd942d35c806f4c72b8477eacdc69dc3, type: 3}
+  m_PrefabInstance: {fileID: 1952956488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &813585477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813585476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0511e82729545eba44234a6c91435c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  currentDestination: {x: 0, y: 0, z: 0}
+  runSpeed: 30
+  walkSpeed: 15
+  zombieHealth: 15
 --- !u!850595691 &813766907
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -465,6 +491,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 387f2527e28f05349b4787bfa49772cb, type: 3}
+--- !u!1 &1025868826 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1210972520514947036, guid: dd942d35c806f4c72b8477eacdc69dc3, type: 3}
+  m_PrefabInstance: {fileID: 785307099}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1025868827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025868826}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0511e82729545eba44234a6c91435c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  currentDestination: {x: 0, y: 0, z: 0}
+  runSpeed: 0
+  walkSpeed: 0
+  zombieHealth: 15
 --- !u!1 &1250712847
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,6 +952,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4277869369700331501, guid: dd942d35c806f4c72b8477eacdc69dc3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6264711801272222409, guid: dd942d35c806f4c72b8477eacdc69dc3, type: 3}
       propertyPath: m_Radius
       value: 0.34972835
@@ -1084,19 +1136,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4819819511944876547, guid: 6abb8a584bc1a2442bdbd7dea4defdf0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9999794
+      value: 0.9999793
       objectReference: {fileID: 0}
     - target: {fileID: 4819819511944876547, guid: 6abb8a584bc1a2442bdbd7dea4defdf0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0033330354
+      value: 0.0033330147
       objectReference: {fileID: 0}
     - target: {fileID: 4819819511944876547, guid: 6abb8a584bc1a2442bdbd7dea4defdf0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0054995148
+      value: 0.00549948
       objectReference: {fileID: 0}
     - target: {fileID: 4819819511944876547, guid: 6abb8a584bc1a2442bdbd7dea4defdf0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000018330453
+      value: -0.000018330224
       objectReference: {fileID: 0}
     - target: {fileID: 4819819511985920167, guid: 6abb8a584bc1a2442bdbd7dea4defdf0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1108,11 +1160,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4819819511985920167, guid: 6abb8a584bc1a2442bdbd7dea4defdf0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.005496516
+      value: 0.0054965504
       objectReference: {fileID: 0}
     - target: {fileID: 4819819511985920167, guid: 6abb8a584bc1a2442bdbd7dea4defdf0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00018145012
+      value: 0.00018145127
       objectReference: {fileID: 0}
     - target: {fileID: 4819819512245838833, guid: 6abb8a584bc1a2442bdbd7dea4defdf0, type: 3}
       propertyPath: m_LocalRotation.w

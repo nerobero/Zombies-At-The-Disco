@@ -7,9 +7,9 @@ using Vector3 = UnityEngine.Vector3;
 public class ZombieAI1 : ZombieAIBase
 {
     
-    private float runSpeed = 30f;
-    private float walkSpeed;
-    private float zombieHealth = 3f;
+    [SerializeField] private float runSpeed = 30f;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float zombieHealth = 3f;
     
      private new void OnCollisionEnter(Collision collision)
     {
