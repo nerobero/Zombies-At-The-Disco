@@ -146,8 +146,17 @@ public class ZombieAIBase : MonoBehaviour
     
     private void OnDestroy() //called, when enemy will be destroyed
     {
-        //TODO: need to implement random drop
-        Instantiate(drop, transform.position, drop.transform.rotation); //dropped coin
+        float random = Random.Range(0, 101);
+        Debug.Log("The random number is " + random);
+        if (random >= 50)
+        {
+            Instantiate(drop, transform.position, drop.transform.rotation); //dropped coin
+            Debug.Log("Coin is dropped");
+        }
+        else
+        {
+            Debug.Log("Coin is not dropped");
+        }
     }
     
     
