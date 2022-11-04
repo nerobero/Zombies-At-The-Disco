@@ -13,6 +13,9 @@ public class ZombieAIBase : MonoBehaviour
         Run,
         Die
     }
+    
+    //The Coin to be dropped
+    [SerializeField] public GameObject drop;
 
     [SerializeField] private State currentState;
     protected bool transitionActive;
@@ -139,6 +142,12 @@ public class ZombieAIBase : MonoBehaviour
     public void DeadCompleted()
     {
         Destroy(gameObject);
+    }
+    
+    private void OnDestroy() //called, when enemy will be destroyed
+    {
+        //TODO: need to implement random drop
+        Instantiate(drop, transform.position, drop.transform.rotation); //dropped coin
     }
     
     
