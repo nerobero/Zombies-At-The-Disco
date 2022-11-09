@@ -34,6 +34,8 @@ public class WaveSpawner : MonoBehaviour
     private int nextWave = 0;
     //spawn state
     private SpawnState state = SpawnState.COUNTING;
+
+    private float searchCountdown = 1f;
     
     // Start is called before the first frame update
     void Start()
@@ -47,7 +49,14 @@ public class WaveSpawner : MonoBehaviour
         if (state == SpawnState.WAITING)
         {
             //check if enemies are still alive: 
-            
+            if (!EnemyIsAlive())
+            {
+                //begin a new round
+            }
+            else
+            {
+                return; 
+            }
         }
         
         if (waveCountDown <= 0) //if time to start spawning waves 
@@ -67,6 +76,18 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
+    bool EnemyIsAlive()
+    {
+        searchCountdown -= Time.deltaTime;
+        if (searchCountdown <= 0f)
+        {
+            if (GameObject.FindGameObjectWithTag("Zombie") == null)
+            {
+                return false;
+            }
+        }
+        return true; 
+    }
     
     IEnumerator SpawnWave(Wave givenWave)
     {
