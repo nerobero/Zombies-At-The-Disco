@@ -44,6 +44,12 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (state == SpawnState.WAITING)
+        {
+            //check if enemies are still alive: 
+            
+        }
+        
         if (waveCountDown <= 0) //if time to start spawning waves 
         {
             //check if we have already started spawning 
