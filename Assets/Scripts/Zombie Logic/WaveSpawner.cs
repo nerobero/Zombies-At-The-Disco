@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -28,7 +29,8 @@ public class WaveSpawner : MonoBehaviour
     public float timeBetweenWaves = 5f;
     //this is going to be private after
     public float waveCountDown;
-
+    //list of spawnPoints
+    public Transform[] spawnPoints;
     
     //the index of the next wave
     private int nextWave = 0;
@@ -40,6 +42,10 @@ public class WaveSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (spawnPoints.Length == 0)
+        {
+            Debug.LogError("No spawn points referenced!");
+        }
         waveCountDown = timeBetweenWaves;
     }
 
@@ -52,7 +58,7 @@ public class WaveSpawner : MonoBehaviour
             if (!EnemyIsAlive())
             {
                 //begin a new round
-                Debug.Log("wave completed");
+                WaveCompleted();
             }
             else
             {
@@ -90,6 +96,28 @@ public class WaveSpawner : MonoBehaviour
         }
         return true; 
     }
+
+    void WaveCompleted()
+    {
+        Debug.Log("wave completed");
+
+        state = SpawnState.COUNTING;
+        waveCountDown = timeBetweenWaves;
+
+        if (nextWave + 1 > waves.Length - 1)
+        {
+            nextWave = 0;
+            Debug.Log("Hooray! You have completed all waves.");
+            //show game finished screen here
+            return;
+        }
+        else
+        {
+            nextWave++;
+        }
+        
+
+    }
     
     IEnumerator SpawnWave(Wave givenWave)
     {
@@ -112,6 +140,8 @@ public class WaveSpawner : MonoBehaviour
     {
         //Spawn enemy
         Debug.Log("Spawn Enemy: " + givenEnemy.name);
-        Instantiate(givenEnemy, transform.position, transform.rotation);
+
+        Transform randomized = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Instantiate(givenEnemy, randomized.position, randomized.rotation);
     }
 }
