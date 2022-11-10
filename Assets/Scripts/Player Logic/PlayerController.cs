@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     private InputAction attack;
 
     public HPSystem PlayerHpSystem;
-    private int energyDrinkCount = 15;
 
     //movement code
     private InputAction move;

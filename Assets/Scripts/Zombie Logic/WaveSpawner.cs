@@ -52,6 +52,7 @@ public class WaveSpawner : MonoBehaviour
             if (!EnemyIsAlive())
             {
                 //begin a new round
+                Debug.Log("wave completed");
             }
             else
             {
@@ -81,6 +82,7 @@ public class WaveSpawner : MonoBehaviour
         searchCountdown -= Time.deltaTime;
         if (searchCountdown <= 0f)
         {
+            searchCountdown = 1f;
             if (GameObject.FindGameObjectWithTag("Zombie") == null)
             {
                 return false;
@@ -91,6 +93,7 @@ public class WaveSpawner : MonoBehaviour
     
     IEnumerator SpawnWave(Wave givenWave)
     {
+        Debug.Log("Spawning wave: " + givenWave.name);
         state = SpawnState.SPAWNING;
         
         //Spawn enemies here:
@@ -109,5 +112,6 @@ public class WaveSpawner : MonoBehaviour
     {
         //Spawn enemy
         Debug.Log("Spawn Enemy: " + givenEnemy.name);
+        Instantiate(givenEnemy, transform.position, transform.rotation);
     }
 }
