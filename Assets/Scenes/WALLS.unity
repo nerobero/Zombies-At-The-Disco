@@ -293,6 +293,7 @@ MonoBehaviour:
   waves: []
   timeBetweenWaves: 5
   waveCountDown: 0
+  spawnPoints: []
 --- !u!4 &145385465
 Transform:
   m_ObjectHideFlags: 0
@@ -2664,6 +2665,7 @@ MonoBehaviour:
   waves: []
   timeBetweenWaves: 5
   waveCountDown: 0
+  spawnPoints: []
 --- !u!4 &1291230145
 Transform:
   m_ObjectHideFlags: 0
@@ -3237,9 +3239,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf890cff64490f409f8caf2bc9cd88d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waves: []
+  waves:
+  - name: 1st level wave (Easy)
+    enemy: {fileID: 0}
+    count: 12
+    spawnRate: 0
+  - name: 2nd level wave (Intermediate)
+    enemy: {fileID: 0}
+    count: 12
+    spawnRate: 0
+  - name: 3rd level wave (Hard)
+    enemy: {fileID: 0}
+    count: 12
+    spawnRate: 0
   timeBetweenWaves: 5
   waveCountDown: 0
+  spawnPoints:
+  - {fileID: 1650480049}
+  - {fileID: 145385465}
+  - {fileID: 1291230145}
 --- !u!4 &1650480049
 Transform:
   m_ObjectHideFlags: 0

@@ -16,10 +16,12 @@ public class PlayerController : MonoBehaviour
     public PlayerInputControl inputs;
     private Animator anim;
 
-    [SerializeField] private Transform meleeTransform;
 
+    //attack
     private InputAction attack;
-
+    public WeaponScript weaponScript;
+    
+    //checking for death
     public HPSystem PlayerHpSystem;
 
     //movement code
@@ -37,7 +39,9 @@ public class PlayerController : MonoBehaviour
     private bool isAttack;
     public Animator animator;
 
-    public WeaponScript weaponScript;
+    //changing music
+    private InputAction interact;
+    public JukeboxScript jukeboxScript;
 
     void Awake()
     {
@@ -72,9 +76,13 @@ public class PlayerController : MonoBehaviour
 
         Attack();
 
+        ChangeMusic();
+
         CheckForDeath();
 
     }
+
+
 
     private void CheckForDeath()
     {
@@ -162,19 +170,16 @@ public class PlayerController : MonoBehaviour
             weaponScript.Attack(animator);
         }
     }
+    
+    private void ChangeMusic()
+    {
+        //throw new NotImplementedException();
 
-    // TODO: What Angela had previously
-    // private void Attack(InputAction.CallbackContext obj)
-    // {
-    //     animator.SetBool("isSwinging", true);
-    //     Collider[] hitZombies = Physics.OverlapSphere(meleeTransform.position, 10, zombieLayer);
-    //
-    //     foreach (Collider z in hitZombies)
-    //     {
-    //         Debug.Log("Hit Zombies");
-    //         z.GetComponent<HPSystem>().TakeDamage(10f);
-    //     }
-    // }
+        if (inputs.PlayerInteraction.Interact.triggered && jukeboxScript != null)
+        {
+            
+        }
+    }
 
     private void Rotate(Transform playerTransform, Transform cameraTransform)
     {
@@ -195,6 +200,7 @@ public class PlayerController : MonoBehaviour
         isRunning = false;
     }
 
+    
 
     private void OnEnable()
     {
