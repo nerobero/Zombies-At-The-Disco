@@ -1,27 +1,14 @@
 fileFormatVersion: 2
-guid: cb0b69d9b44104d4cbf13bd0d304db86
+guid: 66bc37da853a8d14c8abfc0f58cf9fb4
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable:
-  - first:
-      74: -203655887218126122
-    second: mixamo.com
+  internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: _Body
-    second: {fileID: 2100000, guid: 7c7300c09708c794296ec5504c1623a9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: _Body_Mid
-    second: {fileID: 2100000, guid: 8d508664539076f4983e7785381ffecf, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: _Eye_trans
-    second: {fileID: 2100000, guid: 9e5c7aee35334af4bad23d53d84b12a4, type: 2}
+      name: 18800_SledgehammerMat
+    second: {fileID: 2100000, guid: baed1b66d8b2f4b9caf3e9f07a16e3fd, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -60,8 +47,8 @@ ModelImporter:
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
@@ -94,7 +81,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 0
+  importAnimation: 1
   humanDescription:
     serializedVersion: 3
     human: []
