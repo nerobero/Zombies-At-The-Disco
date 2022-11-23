@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -28,22 +29,43 @@ public class WaveSpawner : MonoBehaviour
     public float timeBetweenWaves = 5f;
     //this is going to be private after
     public float waveCountDown;
-
+    //list of spawnPoints
+    public Transform[] spawnPoints;
     
     //the index of the next wave
     private int nextWave = 0;
     //spawn state
     private SpawnState state = SpawnState.COUNTING;
+
+    private float searchCountdown = 1f;
     
     // Start is called before the first frame update
     void Start()
     {
+        if (spawnPoints.Length == 0)
+        {
+            Debug.LogError("No spawn points referenced!");
+        }
         waveCountDown = timeBetweenWaves;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (state == SpawnState.WAITING)
+        {
+            //check if enemies are still alive: 
+            if (!EnemyIsAlive())
+            {
+                //begin a new round
+                WaveCompleted();
+            }
+            else
+            {
+                return; 
+            }
+        }
+        
         if (waveCountDown <= 0) //if time to start spawning waves 
         {
             //check if we have already started spawning 
@@ -61,9 +83,45 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
+    bool EnemyIsAlive()
+    {
+        searchCountdown -= Time.deltaTime;
+        if (searchCountdown <= 0f)
+        {
+            searchCountdown = 1f;
+            if (GameObject.FindGameObjectWithTag("Zombie") == null)
+            {
+                return false;
+            }
+        }
+        return true; 
+    }
+
+    void WaveCompleted()
+    {
+        Debug.Log("wave completed");
+
+        state = SpawnState.COUNTING;
+        waveCountDown = timeBetweenWaves;
+
+        if (nextWave + 1 > waves.Length - 1)
+        {
+            nextWave = 0;
+            Debug.Log("Hooray! You have completed all waves.");
+            //show game finished screen here
+            return;
+        }
+        else
+        {
+            nextWave++;
+        }
+        
+
+    }
     
     IEnumerator SpawnWave(Wave givenWave)
     {
+        Debug.Log("Spawning wave: " + givenWave.name);
         state = SpawnState.SPAWNING;
         
         //Spawn enemies here:
@@ -82,5 +140,8 @@ public class WaveSpawner : MonoBehaviour
     {
         //Spawn enemy
         Debug.Log("Spawn Enemy: " + givenEnemy.name);
+
+        Transform randomized = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Instantiate(givenEnemy, randomized.position, randomized.rotation);
     }
 }
