@@ -45,7 +45,7 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1280
-    height: 629.3334
+    height: 629.3333
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 609.3334
+    y: 609.3333
     width: 1280
     height: 20
   m_MinSize: {x: 0, y: 0}
@@ -115,11 +115,11 @@ MonoBehaviour:
     x: 0
     y: 30
     width: 1280
-    height: 579.3334
+    height: 579.3333
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 104
+  controlID: 18
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,11 +140,11 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 977.3333
-    height: 579.3334
+    height: 579.3333
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 52
+  controlID: 19
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 53
+  controlID: 20
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -241,7 +241,7 @@ MonoBehaviour:
     x: 0
     y: 342.66666
     width: 977.3333
-    height: 236.66672
+    height: 236.66666
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 16}
@@ -269,7 +269,7 @@ MonoBehaviour:
     x: 977.3333
     y: 0
     width: 302.6667
-    height: 579.3334
+    height: 579.3333
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 18}
@@ -336,23 +336,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 16dbffff
+      m_SelectedIDs: 04d3ffff
       m_LastClickedID: 0
-      m_ExpandedIDs: f2f8ffff
+      m_ExpandedIDs: 16fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Bryce
-        m_OriginalName: Bryce
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 25876
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 214.4, y: 4.3500004, z: 154.13}
     speed: 2
-    m_Value: {x: 214.4, y: 4.350001, z: 154.13}
+    m_Value: {x: 214.4, y: 4.3500004, z: 154.13}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -638,11 +638,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.0080203395, y: 0.92058736, z: -0.39009544, w: -0.018736057}
     speed: 2
-    m_Value: {x: -0.007963821, y: 0.9217208, z: -0.3873182, w: -0.018759364}
+    m_Value: {x: -0.0080203395, y: 0.9205873, z: -0.39009547, w: -0.018736057}
   m_Size:
-    m_Target: 5.202163
+    m_Target: 12.468967
     speed: 2
-    m_Value: 5.2021637
+    m_Value: 12.473645
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -782,7 +782,7 @@ MonoBehaviour:
     x: 0
     y: 415.33334
     width: 976.3333
-    height: 215.66672
+    height: 215.66666
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -800,22 +800,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Models
+    - Assets/Models/Sledgehammer
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Models
+  - Assets/Models/Sledgehammer
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\emily\OneDrive\Documents\GitHub\Zombies-At-The-Disco
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 92.33328}
-    m_SelectedIDs: d6690000
-    m_LastClickedID: 27094
-    m_ExpandedIDs: 00000000d2690000d4690000d6690000d8690000da690000dc69000000ca9a3b
+    scrollPos: {x: 0, y: 76.33334}
+    m_SelectedIDs: d4690000
+    m_LastClickedID: 27092
+    m_ExpandedIDs: 00000000726600007466000076660000786600007a6600007c660000026700000667000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -843,7 +843,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d2690000d4690000d6690000d8690000da690000dc690000
+    m_ExpandedIDs: 00000000726600007466000076660000786600007a6600007c660000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -871,7 +871,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c62300001a6200001e290000d6270000a62700006c290000
+    m_ExpandedInstanceIDs: c62300001a6200001e290000d6270000a62700006c290000e067000028680000dc690000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1037,7 +1037,7 @@ MonoBehaviour:
     x: 977.3334
     y: 72.66667
     width: 301.6667
-    height: 558.3334
+    height: 558.3333
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default

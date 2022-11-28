@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: 18800_SledgehammerMat
-    second: {fileID: 2100000, guid: baed1b66d8b2f4b9caf3e9f07a16e3fd, type: 2}
+    second: {fileID: 2100000, guid: cecfb7bd95c13644d9c5325021d3343d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
