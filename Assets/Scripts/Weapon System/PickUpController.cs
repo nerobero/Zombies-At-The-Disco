@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PickUpController : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PickUpController : MonoBehaviour
 
     public WeaponScript weapon;
     public PlayerController playerController;
+    public PlayerInputControl playerinputs;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +42,7 @@ public class PickUpController : MonoBehaviour
     void Update()
     {
         Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickupRange && Input.GetKeyDown(KeyCode.Q) )
+        if (!equipped && distanceToPlayer.magnitude <= pickupRange && playerinputs.PlayerInteraction.Interact.triggered )
         {
             PickUp();
         }

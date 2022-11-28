@@ -39,9 +39,7 @@ public class PlayerController : MonoBehaviour
     private bool isAttack;
     public Animator animator;
 
-    //changing music
-    private InputAction interact;
-    public JukeboxScript jukeboxScript;
+    
 
     void Awake()
     {
@@ -75,8 +73,6 @@ public class PlayerController : MonoBehaviour
         Jump(playerTransform);
 
         Attack();
-
-        ChangeMusic();
 
         CheckForDeath();
 
@@ -171,15 +167,6 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    private void ChangeMusic()
-    {
-        //throw new NotImplementedException();
-
-        if (inputs.PlayerInteraction.Interact.triggered && jukeboxScript != null)
-        {
-            
-        }
-    }
 
     private void Rotate(Transform playerTransform, Transform cameraTransform)
     {

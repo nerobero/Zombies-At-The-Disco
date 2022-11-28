@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class JukeBox : MonoBehaviour
 {
@@ -14,8 +15,10 @@ public class JukeBox : MonoBehaviour
 
     public JukeBoxGUI gui;
     
-    public PlayerController playerController;
+    public PlayerInputControl playerinputs;
 
+    //changing music
+    private InputAction interact;
 
     private void Start()
     {
@@ -26,12 +29,12 @@ public class JukeBox : MonoBehaviour
     void Update()
     {
         Vector3 distanceToPlayer = player.position - transform.position;
-        if (distanceToPlayer.magnitude <= pickupRange && Input.GetKeyDown(KeyCode.E) )
+        if (distanceToPlayer.magnitude <= pickupRange && playerinputs.PlayerInteraction.Interact.triggered )
         {
-            PickUp();
+            ChangeMusic();
         }
     }
-    void PickUp()
+    void ChangeMusic()
     {
         gui.enabled = true;
         gui.showPanel();
