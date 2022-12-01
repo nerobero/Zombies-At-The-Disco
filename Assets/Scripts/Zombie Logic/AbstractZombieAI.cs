@@ -23,10 +23,9 @@ namespace Zombie_Logic
 
         [SerializeField] private Vector3 currentDestination;
 
-        [SerializeField] protected float runSpeed;
-
-        [SerializeField] protected float damageValue;
-        [SerializeField] protected float zombieHealth;
+        private float runSpeed;
+        private float damageValue;
+        private float zombieHealth;
 
         private float walkSpeed = 5f;
         private const float viewAngle = .25f;
@@ -35,6 +34,8 @@ namespace Zombie_Logic
         private GameObject bryce;
         private Animator zombieAnimator;
 
+        [SerializeField] private AudioClip currentSong;
+        private JukeBox juke;
 
         private bool isBryceDead;
 
@@ -50,6 +51,8 @@ namespace Zombie_Logic
             walkSpeed = GetComponent<NavMeshAgent>().speed;
             zombieAnimator = GetComponent<Animator>();
             SwitchToState(State.Chill);
+            juke = gameObject.AddComponent<JukeBox>();
+
             int random = Random.Range(1, 5);
 
             switch (random)
@@ -123,7 +126,7 @@ namespace Zombie_Logic
 
                     break;
                 case State.Run:
-                    
+
                     if (transitionActive)
                     {
                         CancelInvoke(nameof(SwitchToWalk));
@@ -132,7 +135,7 @@ namespace Zombie_Logic
                         GetComponent<NavMeshAgent>().speed = runSpeed;
                         transitionActive = false;
                     }
-                   
+
                     currentDestination = bryce.transform.position;
                     GetComponent<NavMeshAgent>().destination = currentDestination;
 
@@ -157,12 +160,11 @@ namespace Zombie_Logic
                     {
                         var position = transform.position;
                         GetComponent<NavMeshAgent>().destination = currentDestination;
-                        currentDestination = position;   
+                        currentDestination = position;
                         GetComponent<NavMeshAgent>().speed = 0f;
                         UpdateZombieAnimator(false, false, true, false);
                         Debug.Log("dead");
-                        Instantiate(coin, transform.position + 
-                                          Vector3.up + Vector3.up + Vector3.up, Quaternion.identity);
+                        Instantiate(coin, transform.position + (5*Vector3.up), Quaternion.identity);
                         Destroy(gameObject);
                     }
 
@@ -171,7 +173,7 @@ namespace Zombie_Logic
 
             if (isBryceDead)
             {
-               SwitchToState(State.Chill);
+                SwitchToState(State.Chill);
             }
         }
 
@@ -187,7 +189,7 @@ namespace Zombie_Logic
         {
             Destroy(gameObject);
         }
-        
+
         void SwitchToState(State newState)
         {
             transitionActive = true;
@@ -231,9 +233,8 @@ namespace Zombie_Logic
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.transform.CompareTag("Player")) //or tag
+            if (collision.transform.CompareTag("Player")) 
             {
-                //15 damage
                 collision.gameObject.GetComponent<PlayerController>().PlayerHpSystem.TakeDamage(damageValue);
 
                 if (collision.gameObject.GetComponent<PlayerController>().PlayerHpSystem.currentHealth == 0)
@@ -251,7 +252,57 @@ namespace Zombie_Logic
             zombieHealth -= damage;
             SwitchToState(State.Hit);
 
-            Debug.Log("zombie taking damage health now " + zombieHealth);
+            Debug.Log("zombie taking damage: health now " + zombieHealth);
+        }
+
+        //TODO: call this method when the player uses the jukebox
+        private void MusicTime(int index)
+        {
+            //Tentative to change
+            currentSong = juke.GetSong(index);
+
+            switch (index)
+            {
+                case <= 3:
+                    if (runSpeed == 15f || damageValue == 15f || zombieHealth == 15f)
+                    {
+                        Deactivate();
+                    }
+
+                    break;
+
+                case >= 4 and <= 7:
+                    if (runSpeed == 7f || zombieHealth == 20f || damageValue == 30f)
+                    {
+                        Deactivate();
+                    }
+
+                    break;
+
+                case >= 8 and <= 10:
+                    if (runSpeed == 20f || zombieHealth == 10f || damageValue == 10f)
+                    {
+                        Deactivate();
+                    }
+                        break;
+
+                case 11:
+                    //the only fan of thriller :p
+                    if (runSpeed == 30f || zombieHealth == 1f || damageValue == 5f) 
+                    {
+                        Deactivate();
+                    }
+                    break;
+            }
+        }
+
+        private void Deactivate()
+        {
+            runSpeed = 0;
+            SwitchToState(State.Chill);
+            walkSpeed = 0f;
+            damageValue = 0f;
+            enabled = false;
         }
     }
 }
