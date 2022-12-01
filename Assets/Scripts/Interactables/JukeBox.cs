@@ -9,7 +9,7 @@ public class JukeBox : MonoBehaviour
     
     //interpolated from youtube 
 
-    public Transform player;
+    public GameObject player;
     
     public float pickupRange;
 
@@ -26,6 +26,7 @@ public class JukeBox : MonoBehaviour
     private void Start()
     {
         gui.enabled = false;
+        player = GameObject.Find("Bryce");
         sound = GetComponents<AudioSource>()[0];
         sound.volume = 0.5f;
         sound.spatialBlend = 1f;
@@ -35,7 +36,7 @@ public class JukeBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 distanceToPlayer = player.position - transform.position;
+        Vector3 distanceToPlayer = player.transform.position - transform.position;
         if (distanceToPlayer.magnitude <= pickupRange && playerinputs.PlayerInteraction.Interact.triggered )
         {
             ChangeMusic();
