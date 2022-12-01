@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zombie_Logic;
 
 public class WeaponScript : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class WeaponScript : MonoBehaviour
         foreach (var enemy in enemiesHit)
         { 
             Debug.Log("hit" + enemy.name); 
-            enemy.GetComponent<ZombieAI>().TakeDamage(damageAmount);
+            enemy.GetComponent<AbstractZombieAI>().TakeDamage(damageAmount);
 
         }
     }

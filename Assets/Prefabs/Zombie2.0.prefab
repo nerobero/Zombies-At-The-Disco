@@ -3098,10 +3098,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7188173552939147756}
   - component: {fileID: -5978805542049717751}
-  - component: {fileID: 2394419967385496019}
   - component: {fileID: -3814576801113431785}
   - component: {fileID: -7942239031028260062}
   - component: {fileID: 7496770321266542356}
+  - component: {fileID: 6501207412325705530}
   m_Layer: 0
   m_Name: Zombie2.0
   m_TagString: Untagged
@@ -3162,22 +3162,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2394419967385496019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7532927264585677654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd4773a673f6c48d8ac472f56e08c78d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
-  currentDestination: {x: 40, y: 0, z: 60}
-  runSpeed: 15
-  zombieHealth: 15
 --- !u!195 &-3814576801113431785
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3230,6 +3214,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6501207412325705530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7532927264585677654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4773a673f6c48d8ac472f56e08c78d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coin: {fileID: 5568103559966030208, guid: 1a1dd19ffb3f2cb4d867def894e7fab6, type: 3}
+  currentState: 0
+  currentDestination: {x: 0, y: 0, z: 0}
+  runSpeed: 15
+  damageValue: 0
+  zombieHealth: 15
 --- !u!1 &7569863062004148995
 GameObject:
   m_ObjectHideFlags: 0
