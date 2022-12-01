@@ -27,10 +27,10 @@ public class JukeBox : MonoBehaviour
     {
         gui.enabled = false;
         player = GameObject.FindWithTag("Player");
-        sound = GetComponents<AudioSource>()[0];
-        sound.volume = 0.5f;
-        sound.spatialBlend = 1f;
-        sound.maxDistance = 5f;
+        // sound = GetComponents<AudioSource>()[0];
+        // sound.volume = 0.5f;
+        // sound.spatialBlend = 1f;
+        // sound.maxDistance = 5f;
     }
 
     // Update is called once per frame

@@ -1,5 +1,7 @@
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
+using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
@@ -35,7 +37,7 @@ namespace Zombie_Logic
         private Animator zombieAnimator;
 
         [SerializeField] private AudioClip currentSong;
-        private JukeBox juke;
+        //private JukeBox juke;
 
         private bool isBryceDead;
 
@@ -51,7 +53,7 @@ namespace Zombie_Logic
             walkSpeed = GetComponent<NavMeshAgent>().speed;
             zombieAnimator = GetComponent<Animator>();
             SwitchToState(State.Chill);
-            juke = gameObject.AddComponent<JukeBox>();
+           // juke = gameObject.AddComponent<JukeBox>();
 
             int random = Random.Range(1, 5);
 
@@ -135,6 +137,7 @@ namespace Zombie_Logic
                         GetComponent<NavMeshAgent>().speed = runSpeed;
                         transitionActive = false;
                     }
+                    
 
                     currentDestination = bryce.transform.position;
                     GetComponent<NavMeshAgent>().destination = currentDestination;
@@ -164,7 +167,6 @@ namespace Zombie_Logic
                         GetComponent<NavMeshAgent>().speed = 0f;
                         UpdateZombieAnimator(false, false, true, false);
                         Debug.Log("dead");
-                        Instantiate(coin, transform.position + (5*Vector3.up), Quaternion.identity);
                         Destroy(gameObject);
                     }
 
@@ -173,7 +175,7 @@ namespace Zombie_Logic
 
             if (isBryceDead)
             {
-                SwitchToState(State.Chill);
+                Deactivate();
             }
         }
 
@@ -188,6 +190,17 @@ namespace Zombie_Logic
         public void DeadCompleted()
         {
             Destroy(gameObject);
+            int random = Random.Range(0, 100);
+            switch (random)
+            {
+                case <= 50:
+                    Instantiate(coin, transform.position + (2 * Vector3.up),  Quaternion.identity);
+                    Debug.Log("And god said let there be a coin");
+                    break;
+                default:
+                    Debug.Log("No coin for you >:(");
+                    break;
+            }
         }
 
         void SwitchToState(State newState)
@@ -256,10 +269,10 @@ namespace Zombie_Logic
         }
 
         //TODO: call this method when the player uses the jukebox
-        private void MusicTime(int index)
+        public void MusicTime(int index)
         {
             //Tentative to change
-            currentSong = juke.GetSong(index);
+            //currentSong = juke.GetSong(index);
 
             switch (index)
             {
