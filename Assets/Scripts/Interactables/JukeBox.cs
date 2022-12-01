@@ -26,7 +26,7 @@ public class JukeBox : MonoBehaviour
     private void Start()
     {
         gui.enabled = false;
-        player = GameObject.Find("Bryce");
+        player = GameObject.FindWithTag("Player");
         sound = GetComponents<AudioSource>()[0];
         sound.volume = 0.5f;
         sound.spatialBlend = 1f;
