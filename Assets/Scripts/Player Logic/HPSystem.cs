@@ -7,6 +7,8 @@ public class HPSystem : MonoBehaviour
 
    public HealthBarScript healthbar;
 
+   public PlayerGameManager pgm; 
+   
    // Start is called before the first frame update
    void Start()
    {
@@ -22,8 +24,10 @@ public class HPSystem : MonoBehaviour
 
        if (currentHealth <= 0f)
        {
-           Debug.Log("Player died.");
-           // Destroy(gameObject);
+           //should disable player movement here before ending game round: 
+           
+           
+           FindObjectOfType<PlayerGameManager>().EndGameRound();
        }
    }
 
@@ -39,10 +43,5 @@ public class HPSystem : MonoBehaviour
        healthbar.setHealth(currentHealth);
 
    }
-  
-   // Update is called once per frame
-   void Update()
-   {
-      
-   }
+   
 }
