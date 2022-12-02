@@ -155,6 +155,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5048025023230288698}
   - component: {fileID: 1399533571417259816}
+  - component: {fileID: 1274664857210692046}
+  - component: {fileID: -7599271564731761819}
+  - component: {fileID: 8375089297087948831}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -200,3 +203,45 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1274664857210692046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5568103559966030208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cf80628e99e2774a9f3d192e56c36f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &-7599271564731761819
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5568103559966030208}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.8932934
+  m_Height: 3.7865868
+  m_Direction: 1
+  m_Center: {x: 0.13224411, y: -0.058092713, z: -0.040266037}
+--- !u!54 &8375089297087948831
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5568103559966030208}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

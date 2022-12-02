@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,5 +15,14 @@ public class Coin : MonoBehaviour
     void Update()
     {
         
+    }
+
+    // Coin is destoryed when touched by player character
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            DestroyImmediate(gameObject);
+        }
     }
 }
