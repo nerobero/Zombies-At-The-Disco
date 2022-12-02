@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour
     private bool isAttack;
     public Animator animator;
 
+    public AudioSource walkingSound;
+    
+
     
 
     void Awake()
@@ -57,6 +60,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //walkingSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -108,10 +112,12 @@ public class PlayerController : MonoBehaviour
         if (movement.magnitude > 0.1)
         {
             animator.SetBool("isWalking", true);
+            
         }
         else
         {
             animator.SetBool("isWalking", false);
+            walkingSound.Play();
         }
 
         if (isRunning)
@@ -186,6 +192,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isRunning", false);
         isRunning = false;
     }
+    
+    
 
     
 

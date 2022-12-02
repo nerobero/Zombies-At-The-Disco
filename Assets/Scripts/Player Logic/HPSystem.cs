@@ -7,7 +7,8 @@ public class HPSystem : MonoBehaviour
 
    public HealthBarScript healthbar;
 
-   public PlayerGameManager pgm; 
+   public PlayerGameManager pgm;
+   public AudioSource damageSound;
    
    // Start is called before the first frame update
    void Start()
@@ -21,6 +22,7 @@ public class HPSystem : MonoBehaviour
    {
        currentHealth -= damageDealt;
        healthbar.setHealth(currentHealth);
+       damageSound.Play();
 
        if (currentHealth <= 0f)
        {
