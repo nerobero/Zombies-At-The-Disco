@@ -31,7 +31,7 @@ namespace Zombie_Logic
 
         private float walkSpeed = 5f;
         private const float viewAngle = .25f;
-        private const float viewDistance = 5f;
+        private const float viewDistance = 8f;
 
         private GameObject bryce;
         private Animator zombieAnimator;
@@ -153,9 +153,6 @@ namespace Zombie_Logic
                         UpdateZombieAnimator(false, false, false, true);
                         Debug.Log("Hit!");
                     }
-
-                    SwitchToState(zombieHealth != 0 ? State.Run : State.Die);
-
                     break;
 
                 case State.Die:
@@ -175,7 +172,7 @@ namespace Zombie_Logic
 
             if (isBryceDead)
             {
-                Deactivate();
+               SwitchToState(State.Chill);
             }
         }
 
@@ -257,7 +254,7 @@ namespace Zombie_Logic
 
         public void HitComplete()
         {
-            zombieAnimator.SetBool(IsHit, false);
+            SwitchToState(zombieHealth != 0 ? State.Run : State.Die);
         }
 
         public void TakeDamage(float damage)
@@ -311,11 +308,7 @@ namespace Zombie_Logic
 
         private void Deactivate()
         {
-            runSpeed = 0;
-            SwitchToState(State.Chill);
-            walkSpeed = 0f;
-            damageValue = 0f;
-            enabled = false;
+          SwitchToState(State.Chill);
         }
     }
 }
