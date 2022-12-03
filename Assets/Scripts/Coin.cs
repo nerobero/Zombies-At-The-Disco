@@ -22,7 +22,7 @@ public class Coin : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            DestroyImmediate(gameObject);
+            Destroy(gameObject);
         }
     }
 }
