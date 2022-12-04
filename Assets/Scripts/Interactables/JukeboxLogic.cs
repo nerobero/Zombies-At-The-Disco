@@ -10,7 +10,8 @@ public class JukeboxLogic : MonoBehaviour
     public GameObject jukeboxDisplay;
 
     public GameObject jukeboxDisplayChild;
-    //[SerializeField] public AudioClip[] songlist;
+    [SerializeField] public AudioClip[] songlist;
+    private AudioSource source;
     int songCounter = 0;
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,9 @@ public class JukeboxLogic : MonoBehaviour
             juke = GameObject.Find("Jukebox");
         
         jukeboxDisplay.SetActive(false);
+        source = gameObject.GetComponent<AudioSource>();
+        source.clip = songlist[songCounter];
+        source.Play();
     }
 
     // Update is called once per frame
@@ -46,13 +50,25 @@ public class JukeboxLogic : MonoBehaviour
                 GameObject childGUI = jukeboxDisplay.transform.GetChild(1).gameObject;
                 childGUI.transform.Rotate(0.0f, 0.0f, -36.0f, Space.Self);
                 songCounter++;
+                Debug.Log(songlist.Length);
+                if (songCounter >= songlist.Length)
+                {
+                    songCounter = 0;
+                }
+                source.clip = songlist[songCounter];
+                source.Play();
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 GameObject child = jukeboxDisplay.transform.GetChild(1).gameObject;
                 child.transform.Rotate(0.0f, 0.0f, 36.0f, Space.Self);
-                songCounter++;
-                Debug.Log("Song counter is at " + songCounter);
+                songCounter--;
+                if (songCounter < 0)
+                {
+                    songCounter = songlist.Length - 1;
+                }
+                source.clip = songlist[songCounter];
+                source.Play();
                 //Debug.Log("Euler angles: " + child.eulerAngles.z);
             }
         }

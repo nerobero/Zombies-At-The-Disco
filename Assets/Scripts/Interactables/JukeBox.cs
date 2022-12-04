@@ -27,7 +27,7 @@ public class JukeBox : MonoBehaviour
     private void Start()
     {
         gui.enabled = false;
-        jukeboxDisplay.SetActive(false);
+        //jukeboxDisplay.SetActive(false);
         player = GameObject.FindWithTag("Player");
 
         AudioSource sound = gameObject.GetComponent<AudioSource>();
@@ -48,7 +48,7 @@ public class JukeBox : MonoBehaviour
         if (distanceToPlayer.magnitude <= pickupRange && playerinputs.PlayerInteraction.Interact.triggered )
         {
             gui.enabled = true;
-            jukeboxDisplay.SetActive(true);
+            
             ChangeMusic();
         }
     }
