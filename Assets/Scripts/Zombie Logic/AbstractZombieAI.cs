@@ -31,7 +31,7 @@ namespace Zombie_Logic
 
         private float walkSpeed = 5f;
         private const float viewAngle = .25f;
-        private const float viewDistance = 8f;
+        private const float viewDistance = 15f;
 
         private GameObject bryce;
         private Animator zombieAnimator;
@@ -52,6 +52,7 @@ namespace Zombie_Logic
             bryce = GameObject.FindWithTag("Player");
             walkSpeed = GetComponent<NavMeshAgent>().speed;
             zombieAnimator = GetComponent<Animator>();
+            SwitchToState(State.Chill);
             // juke = gameObject.AddComponent<JukeBox>();
 
             int random = Random.Range(1, 5);
@@ -84,8 +85,6 @@ namespace Zombie_Logic
         // Update is called once per frame
         private void Update()
         {
-            CheckForDeath();
-
             switch (currentState)
             {
                 case State.Chill:
@@ -93,10 +92,10 @@ namespace Zombie_Logic
                     {
                         currentDestination = transform.position;
                         GetComponent<NavMeshAgent>().destination = currentDestination;
-                        Invoke(nameof(SwitchToWalk), Random.Range(5.0f, 6.0f));
                         UpdateZombieAnimator(false, false, false, false);
                         GetComponent<NavMeshAgent>().speed = 0f;
                         transitionActive = false;
+                        Invoke(nameof(SwitchToWalk), 5f);
                     }
 
                     if (InView(bryce, viewAngle, viewDistance))
@@ -130,13 +129,11 @@ namespace Zombie_Logic
 
                     if (transitionActive)
                     {
-                        CancelInvoke(nameof(SwitchToWalk));
-                        Invoke(nameof(CheckForDeath), 10.0f);
+                        CancelInvoke(nameof(SwitchToWalk)); 
                         UpdateZombieAnimator(false, true, false, false);
                         GetComponent<NavMeshAgent>().speed = runSpeed;
                         transitionActive = false;
                     }
-                    
 
                     currentDestination = bryce.transform.position;
                     GetComponent<NavMeshAgent>().destination = currentDestination;
@@ -152,24 +149,26 @@ namespace Zombie_Logic
                         GetComponent<NavMeshAgent>().speed = 0f;
                         UpdateZombieAnimator(false, false, false, true);
                         Debug.Log("Hit!");
-                        CheckForDeath();
+                        transitionActive = false;
                     }
                     break;
 
                 case State.Die:
                     if (transitionActive)
-                    {
-                        CancelInvoke(nameof(SwitchToWalk));
+                    { 
                         var position = transform.position;
                         GetComponent<NavMeshAgent>().destination = currentDestination;
                         currentDestination = position;
                         GetComponent<NavMeshAgent>().speed = 0f;
                         UpdateZombieAnimator(false, false, true, true);
                         Debug.Log("dead");
+                        transitionActive = false;
                     }
 
                     break;
             }
+            
+            CheckForDeath();
 
             if (isBryceDead)
             {
@@ -188,10 +187,10 @@ namespace Zombie_Logic
         public void DeadCompleted()
         {
             Destroy(gameObject);
-            int random = Random.Range(0, 100);
+            int random = Random.Range(0, 101);
             switch (random)
             {
-                case <= 50:
+                case <= 51:
                     Instantiate(coin, transform.position + (2 * Vector3.up),  Quaternion.identity);
                     Debug.Log("And god said let there be a coin");
                     break;
@@ -234,7 +233,7 @@ namespace Zombie_Logic
 
         Vector3 ValidDestination()
         {
-            float[,] boundaries = { { 280f, 394f }, { 140f, 176f } };
+            float[,] boundaries = { { 280f, 343f }, { 138f, 172f } };
             var x = Random.Range(boundaries[0, 0], boundaries[0, 1]);
             var z = Random.Range(boundaries[1, 0], boundaries[1, 1]);
             var destination = new Vector3(x,
@@ -310,6 +309,14 @@ namespace Zombie_Logic
         private void Deactivate()
         {
           SwitchToState(State.Chill);
+        }
+
+        private void SecretDeath()
+        {
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                SwitchToState(State.Die);
+            }
         }
     }
 }
