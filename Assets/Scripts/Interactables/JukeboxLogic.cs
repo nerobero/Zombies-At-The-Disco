@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class JukeboxLogic : MonoBehaviour
 {
@@ -13,11 +14,18 @@ public class JukeboxLogic : MonoBehaviour
     [SerializeField] public AudioClip[] songlist;
     private AudioSource source;
     int songCounter = 0;
+    
+    
+    public PlayerInputControl playerinputs;
+
+    //changing music
+    private InputAction interact;
+    
     // Start is called before the first frame update
     void Start()
     {
         if (playerObj == null)
-            playerObj = GameObject.Find("Bryce");
+            playerObj = GameObject.FindGameObjectWithTag("Player");
         if (juke == null)
             juke = GameObject.Find("Jukebox");
         
@@ -35,7 +43,7 @@ public class JukeboxLogic : MonoBehaviour
         //playerObj.transform.position.z);
         float dist = Vector3.Distance(playerObj.transform.position, juke.transform.position);
 
-        if (dist <= 10f)
+        if (dist <= 10f && Input.GetKey(KeyCode.F) )
         {
             jukeboxDisplay.SetActive(true);
             

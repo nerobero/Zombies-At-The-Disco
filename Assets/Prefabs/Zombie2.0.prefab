@@ -3229,9 +3229,7 @@ MonoBehaviour:
   coin: {fileID: 5568103559966030208, guid: 1a1dd19ffb3f2cb4d867def894e7fab6, type: 3}
   currentState: 0
   currentDestination: {x: 0, y: 0, z: 0}
-  runSpeed: 15
-  damageValue: 0
-  zombieHealth: 15
+  currentSong: {fileID: 0}
 --- !u!1 &7569863062004148995
 GameObject:
   m_ObjectHideFlags: 0

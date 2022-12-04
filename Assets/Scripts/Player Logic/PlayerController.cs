@@ -5,6 +5,7 @@ using System.Transactions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 
 public class PlayerController : MonoBehaviour
@@ -140,6 +141,11 @@ public class PlayerController : MonoBehaviour
         // Vector3 movement = (playerTransform.forward * moveDirection.z); //non strafing
 
         controller.Move(movement * (speed * Time.deltaTime));
+    }
+    
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        Cursor.lockState = hasFocus ? CursorLockMode.Locked : CursorLockMode.None;
     }
 
     private void Jump(Transform playerTransform)
