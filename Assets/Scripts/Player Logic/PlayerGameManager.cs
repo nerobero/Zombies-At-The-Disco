@@ -14,9 +14,15 @@ public class PlayerGameManager : MonoBehaviour
             gameEnded = true;
             Debug.Log("The player has died!");
             //restart game here
-            SceneManager.LoadSceneAsync("PlayAgain");
-
+            SceneManager.LoadSceneAsync(2);
+            Debug.Log("Respawning in 3 seconds...");
+            Invoke("Restart", 3f);
         }
+    }
+
+    void Restart()
+    {
+        SceneManager.LoadSceneAsync(1);
     }
 
     public void EndAllGame()

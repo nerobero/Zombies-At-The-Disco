@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class HPSystem : MonoBehaviour
 {
@@ -28,8 +27,7 @@ public class HPSystem : MonoBehaviour
        if (currentHealth <= 0f)
        {
            //should disable player movement here before ending game round: 
-           SceneManager.LoadSceneAsync("PlayAgain");
-           //pgm.EndGameRound();
+           pgm.EndGameRound();
        }
    }
 
