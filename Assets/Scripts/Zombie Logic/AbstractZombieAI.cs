@@ -52,8 +52,7 @@ namespace Zombie_Logic
             bryce = GameObject.FindWithTag("Player");
             walkSpeed = GetComponent<NavMeshAgent>().speed;
             zombieAnimator = GetComponent<Animator>();
-            SwitchToState(State.Chill);
-           // juke = gameObject.AddComponent<JukeBox>();
+            // juke = gameObject.AddComponent<JukeBox>();
 
             int random = Random.Range(1, 5);
 
@@ -147,24 +146,26 @@ namespace Zombie_Logic
                 case State.Hit:
                     if (transitionActive)
                     {
+                        CancelInvoke(nameof(SwitchToWalk));
                         currentDestination = transform.position;
                         GetComponent<NavMeshAgent>().destination = currentDestination;
                         GetComponent<NavMeshAgent>().speed = 0f;
                         UpdateZombieAnimator(false, false, false, true);
                         Debug.Log("Hit!");
+                        CheckForDeath();
                     }
                     break;
 
                 case State.Die:
                     if (transitionActive)
                     {
+                        CancelInvoke(nameof(SwitchToWalk));
                         var position = transform.position;
                         GetComponent<NavMeshAgent>().destination = currentDestination;
                         currentDestination = position;
                         GetComponent<NavMeshAgent>().speed = 0f;
-                        UpdateZombieAnimator(false, false, true, false);
+                        UpdateZombieAnimator(false, false, true, true);
                         Debug.Log("dead");
-                        Destroy(gameObject);
                     }
 
                     break;
