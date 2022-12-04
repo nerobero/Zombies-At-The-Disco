@@ -13,18 +13,25 @@ public class WeaponScript : MonoBehaviour
     public LayerMask enemyLayers;
     public float damageAmount = 1f;
     public String trigger = "punch";
+    public float attackCooldownSeconds;
+    public float lastAttackTime;
     
     public void Attack(Animator animator)
     {
-        Debug.Log("attacking with " + trigger); 
-        animator.SetBool(trigger, true);
-        Collider[] enemiesHit = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+        if (Time.time - lastAttackTime > attackCooldownSeconds || lastAttackTime == 0f)
+        {
+            Debug.Log("attacking with " + trigger); 
+            animator.SetBool(trigger, true);
+            Collider[] enemiesHit = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
-        foreach (var enemy in enemiesHit)
-        { 
-            Debug.Log("hit" + enemy.name); 
-            enemy.GetComponent<AbstractZombieAI>().TakeDamage(damageAmount);
+            foreach (var enemy in enemiesHit)
+            { 
+                Debug.Log("hit" + enemy.name); 
+                enemy.GetComponent<AbstractZombieAI>().TakeDamage(damageAmount);
 
+            }
+
+            lastAttackTime = Time.time; 
         }
     }
 
