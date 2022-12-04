@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,5 +19,10 @@ public class PlayMenu : MonoBehaviour
     public void Quit()
     {
         return;
+    }
+
+    private void Start()
+    {
+        
     }
 }
