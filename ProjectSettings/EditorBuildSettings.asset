@@ -11,5 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WALLS.unity
     guid: 37bd2cf8f919b45dca129f589e8ecbd1
+  - enabled: 1
+    path: Assets/Scenes/PlayAgain.unity
+    guid: f741d90d7ca00d042bb94cb234200693
+  - enabled: 1
+    path: Assets/Scenes/EndGame.unity
+    guid: 7cf42da92ff95134cbcffa2e8ac7eff5
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 18992134563ec59468bed8497b698ba4, type: 2}

@@ -39,6 +39,9 @@ public class WaveSpawner : MonoBehaviour
 
     private float searchCountdown = 1f;
     
+    //game manager for uploading the game over 
+    public PlayerGameManager pgm; 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -109,7 +112,7 @@ public class WaveSpawner : MonoBehaviour
             nextWave = 0;
             Debug.Log("Hooray! You have completed all waves.");
             //show game finished screen here
-            return;
+            pgm.EndAllGame();
         }
         else
         {

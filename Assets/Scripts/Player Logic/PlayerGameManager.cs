@@ -15,12 +15,23 @@ public class PlayerGameManager : MonoBehaviour
             gameEnded = true;
             Debug.Log("The player has died!");
             //restart game here
-            Invoke("RestartRound", respawnTime);
+            RestartRound();
         }
     }
 
     void RestartRound()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameEnded = false;
+        SceneManager.LoadScene("PlayAgain");
+    }
+
+    public void EndAllGame()
+    {
+        if (!gameEnded)
+        {
+            gameEnded = true;
+            Debug.Log("The game has successfully ended!");
+            SceneManager.LoadScene("EndGame");
+        }
     }
 }
