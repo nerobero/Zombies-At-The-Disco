@@ -24,19 +24,27 @@ public class JukeboxLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("Player Position: X = " + playerObj.transform.position.x + " --- Y = " + playerObj.transform.position.y + " --- Z = " + playerObj.transform.position.z);
+        //Debug.Log("Player Position: X = " + playerObj.transform.position.x +
+        //" --- Y = " + playerObj.transform.position.y + " --- Z = " +
+        //playerObj.transform.position.z);
         float dist = Vector3.Distance(playerObj.transform.position, juke.transform.position);
 
         if (dist <= 10f)
         {
             jukeboxDisplay.SetActive(true);
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 Debug.Log("Left arrow");
-                //(jukeboxDisplayChild.GetComponent("JukeboxCanvas_Front")).transform.Rotate(0.0f, 0.0f, 36.0f, Space.Self);
+                //(jukeboxDisplayChild.GetComponent("JukeboxCanvas_Front")).transform.Rotate(0.0f,
+                //0.0f, 36.0f, Space.Self);
                 //jukeboxDisplay.transform.Rotate(0.0f, 0.0f, 36.0f, Space.Self);
+
+                int songCounter = 0;
                 GameObject child = jukeboxDisplay.transform.GetChild(1).gameObject;
                 child.transform.Rotate(0.0f, 0.0f, 36.0f, Space.Self);
+                songCounter++;
+                Debug.Log("Song counter is at " + songCounter);
+                //Debug.Log("Euler angles: " + child.eulerAngles.z);
             }
         }
         else

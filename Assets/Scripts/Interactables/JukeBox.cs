@@ -22,6 +22,7 @@ public class JukeBox : MonoBehaviour
 
     [SerializeField] private AudioClip[] songlist;
     private AudioSource sound;
+    private int rotatationAmount;
 
     private void Start()
     {
