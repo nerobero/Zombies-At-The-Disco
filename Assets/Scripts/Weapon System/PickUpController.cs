@@ -13,7 +13,6 @@ public class PickUpController : MonoBehaviour
 
     public Transform player;
     public Transform weaponContainer;
-    public Transform cam;
 
     public float pickupRange;
 
