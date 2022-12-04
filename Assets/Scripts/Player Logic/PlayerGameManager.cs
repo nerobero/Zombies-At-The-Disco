@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerGameManager : MonoBehaviour
 {
     private bool gameEnded = false;
-    public float respawnTime = 2f;
-    
+
     public void EndGameRound()
     {
         if (!gameEnded)
@@ -15,14 +14,9 @@ public class PlayerGameManager : MonoBehaviour
             gameEnded = true;
             Debug.Log("The player has died!");
             //restart game here
-            RestartRound();
-        }
-    }
+            SceneManager.LoadSceneAsync("PlayAgain");
 
-    void RestartRound()
-    {
-        gameEnded = false;
-        SceneManager.LoadScene("PlayAgain");
+        }
     }
 
     public void EndAllGame()
@@ -31,7 +25,7 @@ public class PlayerGameManager : MonoBehaviour
         {
             gameEnded = true;
             Debug.Log("The game has successfully ended!");
-            SceneManager.LoadScene("EndGame");
+            SceneManager.LoadSceneAsync("EndGame");
         }
     }
 }

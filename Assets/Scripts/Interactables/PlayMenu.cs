@@ -8,17 +8,17 @@ public class PlayMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadSceneAsync("SampleScene");
     }
 
     public void Restart()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadSceneAsync("SampleScene");
     }
 
     public void Quit()
     {
-        return;
+        Application.Quit();
     }
 
     private void Start()
