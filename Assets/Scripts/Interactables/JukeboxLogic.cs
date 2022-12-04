@@ -10,6 +10,8 @@ public class JukeboxLogic : MonoBehaviour
     public GameObject jukeboxDisplay;
 
     public GameObject jukeboxDisplayChild;
+    //[SerializeField] public AudioClip[] songlist;
+    int songCounter = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,7 @@ public class JukeboxLogic : MonoBehaviour
         if (dist <= 10f)
         {
             jukeboxDisplay.SetActive(true);
+            
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 Debug.Log("Left arrow");
@@ -39,7 +42,13 @@ public class JukeboxLogic : MonoBehaviour
                 //0.0f, 36.0f, Space.Self);
                 //jukeboxDisplay.transform.Rotate(0.0f, 0.0f, 36.0f, Space.Self);
 
-                int songCounter = 0;
+                
+                GameObject childGUI = jukeboxDisplay.transform.GetChild(1).gameObject;
+                childGUI.transform.Rotate(0.0f, 0.0f, -36.0f, Space.Self);
+                songCounter++;
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
                 GameObject child = jukeboxDisplay.transform.GetChild(1).gameObject;
                 child.transform.Rotate(0.0f, 0.0f, 36.0f, Space.Self);
                 songCounter++;

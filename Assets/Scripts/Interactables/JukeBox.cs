@@ -20,14 +20,21 @@ public class JukeBox : MonoBehaviour
     //changing music
     private InputAction interact;
 
-    [SerializeField] private AudioClip[] songlist;
-    private AudioSource sound;
+    [SerializeField] public AudioClip[] songlist;
+    
     private int rotatationAmount;
 
     private void Start()
     {
         gui.enabled = false;
+        jukeboxDisplay.SetActive(false);
         player = GameObject.FindWithTag("Player");
+
+        AudioSource sound = gameObject.GetComponent<AudioSource>();
+
+        sound.clip = songlist[0];
+        sound.Play();
+
         // sound = GetComponents<AudioSource>()[0];
         // sound.volume = 0.5f;
         // sound.spatialBlend = 1f;
@@ -40,6 +47,8 @@ public class JukeBox : MonoBehaviour
         Vector3 distanceToPlayer = player.transform.position - transform.position;
         if (distanceToPlayer.magnitude <= pickupRange && playerinputs.PlayerInteraction.Interact.triggered )
         {
+            gui.enabled = true;
+            jukeboxDisplay.SetActive(true);
             ChangeMusic();
         }
     }
