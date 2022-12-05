@@ -25,6 +25,7 @@ namespace Zombie_Logic
 
         [SerializeField] private Vector3 currentDestination;
 
+        public Score score;
         private float runSpeed;
         private float damageValue;
         private float zombieHealth;
@@ -163,6 +164,7 @@ namespace Zombie_Logic
                         currentDestination = position;
                         GetComponent<NavMeshAgent>().speed = 0f;
                         UpdateZombieAnimator(false, false, true, true);
+                        score.score += 1;
                         Debug.Log("dead");
                         transitionActive = false;
                     }

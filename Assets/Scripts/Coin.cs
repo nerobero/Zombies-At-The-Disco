@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    public Score score;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,7 @@ public class Coin : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            score.score += 1;
             Destroy(gameObject);
         }
     }
