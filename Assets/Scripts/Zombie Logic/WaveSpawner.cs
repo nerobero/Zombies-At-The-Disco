@@ -33,7 +33,7 @@ public class WaveSpawner : MonoBehaviour
     public Transform[] spawnPoints;
     
     //the index of the next wave
-    private int nextWave = 0;
+    public int nextWave = 0;
     //spawn state
     private SpawnState state = SpawnState.COUNTING;
 

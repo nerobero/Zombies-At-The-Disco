@@ -2823,7 +2823,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9246f77eb08409a8fe0df8abd469b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
 --- !u!54 &539606608
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6138,6 +6137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1292486756}
   - component: {fileID: 1292486755}
+  - component: {fileID: 1292486757}
   m_Layer: 5
   m_Name: GUI
   m_TagString: Untagged
@@ -6176,6 +6176,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1292486757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292486754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84859ad34cee36048ab35ca7561e3695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1297182463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7906,22 +7918,23 @@ MonoBehaviour:
   waves:
   - name: 1st level wave (Easy)
     enemy: {fileID: 7188173552939147756, guid: e13ee40e20e71af44bcc7ae95a03f83d, type: 3}
-    count: 12
-    spawnRate: 2
+    count: 5
+    spawnRate: 6
   - name: 2nd level wave (Intermediate)
     enemy: {fileID: 7188173552939147756, guid: e13ee40e20e71af44bcc7ae95a03f83d, type: 3}
-    count: 12
-    spawnRate: 2
+    count: 4
+    spawnRate: 7
   - name: 3rd level wave (Hard)
     enemy: {fileID: 7188173552939147756, guid: e13ee40e20e71af44bcc7ae95a03f83d, type: 3}
-    count: 12
-    spawnRate: 2
+    count: 3
+    spawnRate: 8
   timeBetweenWaves: 5
   waveCountDown: 0
   spawnPoints:
   - {fileID: 1650480049}
   - {fileID: 145385465}
   - {fileID: 1291230145}
+  nextWave: 0
   pgm: {fileID: 89966748}
 --- !u!4 &1650480049
 Transform:
@@ -11127,15 +11140,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 988639978787515575, guid: 6abb8a584bc1a2442bdbd7dea4defdf0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.12426667
+      value: 0.12426666
       objectReference: {fileID: 0}
     - target: {fileID: 988639978787515575, guid: 6abb8a584bc1a2442bdbd7dea4defdf0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.002736891
+      value: 0.0027368835
       objectReference: {fileID: 0}
     - target: {fileID: 988639978787515575, guid: 6abb8a584bc1a2442bdbd7dea4defdf0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00034276248
+      value: -0.00034276152
       objectReference: {fileID: 0}
     - target: {fileID: 2887874976049317856, guid: 6abb8a584bc1a2442bdbd7dea4defdf0, type: 3}
       propertyPath: m_RootOrder
