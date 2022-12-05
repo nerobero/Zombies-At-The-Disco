@@ -8,7 +8,9 @@ public class PlayMenu : MonoBehaviour
 {
     public void PlayGame()
     {
+        
         SceneManager.LoadSceneAsync("SampleScene");
+        
     }
 
     public void Restart()
