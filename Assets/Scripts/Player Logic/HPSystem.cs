@@ -9,6 +9,7 @@ public class HPSystem : MonoBehaviour
 
    public PlayerGameManager pgm;
    public AudioSource damageSound;
+   public Animator animator;
    
    // Start is called before the first frame update
    void Start()
@@ -20,6 +21,7 @@ public class HPSystem : MonoBehaviour
    //when called, the object that calls the function takes damage
    public void TakeDamage(float damageDealt)
    {
+       animator.SetTrigger("takeDamage");
        currentHealth -= damageDealt;
        healthbar.setHealth(currentHealth);
        damageSound.Play();
