@@ -35,6 +35,8 @@ namespace Zombie_Logic
 
         private GameObject bryce;
         private Animator zombieAnimator;
+        public AudioSource deathSound;
+        public AudioSource idleSound;
 
         [SerializeField] private AudioClip currentSong;
         //private JukeBox juke;
@@ -181,6 +183,7 @@ namespace Zombie_Logic
             if (zombieHealth <= 0)
             {
                 SwitchToState(State.Die);
+                deathSound.Play();
             }
         }
 
