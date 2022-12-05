@@ -26,6 +26,7 @@ public class Projectile : MonoBehaviour
             if (collision.gameObject.GetComponent<AbstractZombieAI>() != null)
             {
                 collision.gameObject.GetComponent<AbstractZombieAI>().TakeDamage(damage);
+                Debug.Log("hit zombie");
             }
         }
     }
