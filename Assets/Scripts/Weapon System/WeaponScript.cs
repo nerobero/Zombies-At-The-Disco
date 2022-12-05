@@ -15,6 +15,7 @@ public class WeaponScript : MonoBehaviour
     public String trigger = "punch";
     public float attackCooldownSeconds;
     public float lastAttackTime;
+    public AudioSource hitSound;
     
     public void Attack(Animator animator)
     {
@@ -39,6 +40,11 @@ public class WeaponScript : MonoBehaviour
     {
         if (attackPoint == null) return;
          Gizmos.DrawSphere(attackPoint.position, attackRange);
+    }
+
+    private void OnCollisionEnter()
+    {
+        hitSound.Play();
     }
 
     // Start is called before the first frame update
