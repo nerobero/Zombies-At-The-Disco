@@ -180,6 +180,7 @@ namespace Zombie_Logic
         {
             if (zombieHealth <= 0)
             {
+                Debug.Log("dying");
                 SwitchToState(State.Die);
             }
         }
@@ -261,7 +262,7 @@ namespace Zombie_Logic
         {
             zombieHealth -= damage;
             SwitchToState(State.Hit);
-
+            
             Debug.Log("zombie taking damage: health now " + zombieHealth);
         }
 

@@ -40,11 +40,21 @@ public class PickUpController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickupRange && Input.GetKeyDown(KeyCode.E))
+        if (equipped && Input.GetKeyDown(KeyCode.E))
         {
-            PickUp();
+            Drop();
         }
+        else
+        {
+            Vector3 distanceToPlayer = player.position - transform.position;
+            if (!equipped && distanceToPlayer.magnitude <= pickupRange && Input.GetKeyDown(KeyCode.E))
+            {
+                PickUp();
+            }
+        }
+        
+
+        
     }
 
     void PickUp()
@@ -61,6 +71,21 @@ public class PickUpController : MonoBehaviour
 
         weapon.enabled = true;
         playerController.weaponScript = weapon;
+    }
+
+    void Drop()
+    {
+        equipped = false;
+        rigid.isKinematic = false;
+        collider.isTrigger = false;
+        
+        transform.SetParent(null);
+
+        rigid.velocity = player.GetComponent<Rigidbody>().velocity;
+        // rigid.AddForce(dropForce, ForceMode.Impulse);
+
+        playerController.weaponScript = playerController.fist;
+        weapon.enabled = false;
     }
     
 }

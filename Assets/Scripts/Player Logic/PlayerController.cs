@@ -41,8 +41,8 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
 
     public AudioSource walkingSound;
-    
 
+    public WeaponScript fist;
     
 
     void Awake()
@@ -55,7 +55,11 @@ public class PlayerController : MonoBehaviour
 
         inputs.PlayerInteraction.Run.performed += Run;
         inputs.PlayerInteraction.EndRun.performed += RunEnd;
+
+        fist = weaponScript;
     }
+    
+    
 
 
     // Start is called before the first frame update
