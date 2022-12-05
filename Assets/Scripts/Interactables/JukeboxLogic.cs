@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zombie_Logic;
 
 public class JukeboxLogic : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class JukeboxLogic : MonoBehaviour
     [SerializeField] public AudioClip[] songlist;
     private AudioSource source;
     int songCounter = 0;
-    
+    private GameObject zombie;
     
     public PlayerInputControl playerinputs;
 
@@ -28,11 +29,13 @@ public class JukeboxLogic : MonoBehaviour
             playerObj = GameObject.FindGameObjectWithTag("Player");
         if (juke == null)
             juke = GameObject.Find("Jukebox");
-        
+        if (zombie == null)
+            zombie = GameObject.FindWithTag("Zombie");
         jukeboxDisplay.SetActive(false);
         source = gameObject.GetComponent<AudioSource>();
         source.clip = songlist[songCounter];
         source.Play();
+        zombie.GetComponent<AbstractZombieAI>().MusicTime(songCounter);
     }
 
     // Update is called once per frame

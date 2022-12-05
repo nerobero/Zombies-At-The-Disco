@@ -153,6 +153,12 @@ namespace Zombie_Logic
                         UpdateZombieAnimator(false, false, false, true);
                         Debug.Log("Hit!");
                         transitionActive = false;
+                        
+                        if (zombieHealth <= 0)
+                        {
+                            SwitchToState(State.Die);
+                            deathSound.Play();
+                        }
                     }
                     break;
 
@@ -171,9 +177,6 @@ namespace Zombie_Logic
 
                     break;
             }
-            
-            CheckForDeath();
-
             if (isBryceDead)
             {
                SwitchToState(State.Chill);
@@ -269,6 +272,12 @@ namespace Zombie_Logic
             SwitchToState(State.Hit);
             
             Debug.Log("zombie taking damage: health now " + zombieHealth);
+
+            if (zombieHealth <= 0)
+            {
+                SwitchToState(State.Die);
+                deathSound.Play();
+            }
         }
 
         //TODO: call this method when the player uses the jukebox
