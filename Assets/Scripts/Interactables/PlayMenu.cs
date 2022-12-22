@@ -3,28 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class PlayMenu : MonoBehaviour
 {
-    public void PlayGame()
-    {
-        
-        SceneManager.LoadSceneAsync("SampleScene");
-        
-    }
 
-    public void Restart()
-    {
-        SceneManager.LoadSceneAsync("SampleScene");
-    }
+    private VisualElement root;
 
-    public void Quit()
-    {
-        Application.Quit();
-    }
-
+    private Button playButton;
+    
     private void Start()
     {
+        root = GetComponent<UIDocument>().rootVisualElement;
+        playButton = root.Q<Button>("PlayButton");
         
+        //setting up the event handler for button: 
+        playButton.RegisterCallback<ClickEvent>(ChangeScene);
+
     }
+
+    private void ChangeScene(ClickEvent evt)
+    {
+        SceneManager.LoadScene("Scenes/SampleScene");
+    }
+    
 }

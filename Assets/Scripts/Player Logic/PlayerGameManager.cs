@@ -13,17 +13,14 @@ public class PlayerGameManager : MonoBehaviour
         {
             gameEnded = true;
             Debug.Log("The player has died!");
-            //restart game here
-            Debug.Log("Respawning in 3 seconds...");
-            GameObject.Find("PlayAgainScreen").GetComponent<Canvas>().enabled = true;
-            Invoke("Restart", 3f);
+            //Change Scene
+            Invoke("ChangeScene", 3f);
         }
     }
 
-    void Restart()
+    private void ChangeScene()
     {
-        GameObject.Find("PlayAgainScreen").GetComponent<Canvas>().enabled = false;
-        SceneManager.LoadSceneAsync("SampleScene");
+        SceneManager.LoadScene("Scenes/PlayAgain");
     }
 
     public void EndAllGame()
@@ -32,12 +29,12 @@ public class PlayerGameManager : MonoBehaviour
         {
             gameEnded = true;
             Debug.Log("The game has successfully ended!");
-            SceneManager.LoadSceneAsync("EndGame");
+            SceneManager.LoadScene("Scenes/EndGame");
         }
     }
 
     void Start()
     {
-        GameObject.Find("PlayAgainScreen").GetComponent<Canvas>().enabled = false;
+        
     }
 }
